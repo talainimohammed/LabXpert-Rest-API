@@ -15,4 +15,6 @@ public class Outil {
     private int quantite;
     @ManyToOne
     private Fournisseur fournisseur;
+    @Column(name="is_deleted")
+    private Boolean deleted;
 }

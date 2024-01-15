@@ -16,4 +16,5 @@ public class ReactifAnalyse {
     @ManyToOne
     private Reactif reactif;
     private int quantite;
+
 }

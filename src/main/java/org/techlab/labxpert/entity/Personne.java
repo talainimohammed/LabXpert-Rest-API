@@ -2,10 +2,7 @@ package org.techlab.labxpert.entity;
 
 import lombok.Data;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.util.Date;
 @Data
 @MappedSuperclass
@@ -19,7 +16,8 @@ public class Personne {
     private String sexe;
     private String adresse;
     private String tel;
-
+    @Column(name="is_deleted")
+    private Boolean deleted=false;
     public Personne() {
     }
 

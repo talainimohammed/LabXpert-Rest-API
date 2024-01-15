@@ -11,6 +11,7 @@ public interface I_Utilisateur {
     public UtilisateurDTO modUser(UtilisateurDTO userdto);
     public Boolean delUser(UtilisateurDTO userdto);
     public List<UtilisateurDTO> showUsers();
+    public UtilisateurDTO showUserwithid(Long id);
 
     public UtilisateurDTO authentification(String username,String password);
 }

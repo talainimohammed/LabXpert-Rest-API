@@ -17,6 +17,8 @@ public class Reactif {
     private Date dateExpiration;
     @ManyToOne
     private Fournisseur fournisseur;
+    @Column(name="is_deleted")
+    private Boolean deleted;
 
     public Reactif() {
     }

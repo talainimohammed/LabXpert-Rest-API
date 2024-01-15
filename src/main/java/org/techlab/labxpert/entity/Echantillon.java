@@ -15,6 +15,8 @@ public class Echantillon {
     private Patient patient;
     private String typeAnalyse;
     private StatutEchantillon Status;
+    @Column(name="is_deleted")
+    private Boolean deleted;
 
     public Echantillon() {
     }

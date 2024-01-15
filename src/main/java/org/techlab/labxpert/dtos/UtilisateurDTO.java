@@ -16,5 +16,6 @@ public class UtilisateurDTO {
     private RoleUser role;
     private String password;
     private String nomUtilisateur;
+    private Boolean deleted=false;
 
 }

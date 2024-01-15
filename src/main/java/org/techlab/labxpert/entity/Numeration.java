@@ -17,6 +17,8 @@ public class Numeration {
     private Norme norme;
     @ManyToOne
     private Analyse analyse;
+    @Column(name="is_deleted")
+    private Boolean deleted;
 
 
 }

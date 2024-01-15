@@ -13,6 +13,8 @@ public class Fournisseur {
     private String nom;
     private String adresse;
     private String tel;
+    @Column(name="is_deleted")
+    private Boolean deleted;
 
     public Fournisseur() {
     }

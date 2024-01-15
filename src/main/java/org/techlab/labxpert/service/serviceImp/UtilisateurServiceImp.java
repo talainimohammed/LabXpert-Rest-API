@@ -11,6 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @ComponentScan(basePackages = "com.labtech.labxpert")
@@ -27,23 +28,33 @@ public class UtilisateurServiceImp implements I_Utilisateur {
     }
     @Override
     public List<UtilisateurDTO> showUsers() {
-        List<Utilisateur> users=utilisateurRepository.findAll();
-        return users.stream().map(user->modelMapper.map(user,UtilisateurDTO.class)).toList();
+        List<Utilisateur> users=utilisateurRepository.findByDeletedFalse();
+        return users.stream().map(user->modelMapper.map(user,UtilisateurDTO.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public UtilisateurDTO showUserwithid(Long id) {
+        Utilisateur utilisateur =utilisateurRepository.findById(id).get();
+        return modelMapper.map(utilisateur,UtilisateurDTO.class);
     }
 
     @Override
     public UtilisateurDTO authentification(String username, String password) {
-        return null;
+
+        Utilisateur user=utilisateurRepository.findUserByUsernameAndPassword(username,password);
+        return modelMapper.map(user,UtilisateurDTO.class);
     }
 
     @Override
     public UtilisateurDTO modUser(UtilisateurDTO userdto) {
-        return null;
+        Utilisateur user=utilisateurRepository.save(modelMapper.map(userdto,Utilisateur.class));
+        return modelMapper.map(user,UtilisateurDTO.class);
     }
 
     @Override
     public Boolean delUser(UtilisateurDTO userdto) {
-        return null;
+        Utilisateur user=utilisateurRepository.save(modelMapper.map(userdto,Utilisateur.class));
+        return user.getDeleted();
     }
 
 

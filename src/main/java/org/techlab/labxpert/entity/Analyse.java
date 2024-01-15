@@ -17,6 +17,8 @@ public class Analyse {
     private Date dateDebut;
     private Date dateFin;
     private String commantaire;
+    @Column(name="is_deleted")
+    private Boolean deleted;
 
     public Analyse() {
     }

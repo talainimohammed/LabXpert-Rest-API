@@ -14,6 +14,8 @@ public class Norme {
     private  String unite;
     private double maxValue;
     private double minValue;
+    @Column(name="is_deleted")
+    private Boolean deleted;
 
 
 }
