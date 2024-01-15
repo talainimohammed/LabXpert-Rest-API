@@ -22,14 +22,13 @@ public class UtilisateurServiceImp implements I_Utilisateur {
     ModelMapper modelMapper=new ModelMapper();
     @Override
     public UtilisateurDTO addUser(UtilisateurDTO userdto) {
-        Utilisateur user=modelMapper.map(userdto,Utilisateur.class);
-        return utilisateurRepository.save(user);
-       // return user;
+        Utilisateur user=utilisateurRepository.save(modelMapper.map(userdto,Utilisateur.class));
+        return modelMapper.map(user,UtilisateurDTO.class);
     }
     @Override
     public List<UtilisateurDTO> showUsers() {
-        return utilisateurRepository.findAll();
-        //return null;
+        List<Utilisateur> users=utilisateurRepository.findAll();
+        return users.stream().map(user->modelMapper.map(user,UtilisateurDTO.class)).toList();
     }
 
     @Override

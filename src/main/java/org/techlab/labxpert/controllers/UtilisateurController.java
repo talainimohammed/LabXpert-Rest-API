@@ -1,10 +1,9 @@
 package org.techlab.labxpert.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.techlab.labxpert.dtos.UtilisateurDTO;
 import org.techlab.labxpert.entity.Utilisateur;
 import org.techlab.labxpert.service.I_Utilisateur;
@@ -24,9 +23,9 @@ public class UtilisateurController {
         return listusers;
     }
     @PostMapping
-    public List addUser(){
-        List<UtilisateurDTO> listusers=i_utilisateur.showUsers();
-        return listusers;
+    public ResponseEntity<UtilisateurDTO> addUser(@RequestBody UtilisateurDTO utilisateurDTO){
+        UtilisateurDTO utilisateurDTO1=i_utilisateur.addUser(utilisateurDTO);
+        return new ResponseEntity<>(utilisateurDTO1, HttpStatus.CREATED);
     }
 
 
