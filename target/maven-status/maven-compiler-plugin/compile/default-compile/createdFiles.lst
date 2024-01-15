@@ -1,0 +1,16 @@
+org\techlab\labxpert\repository\PatientRepository.class
+org\techlab\labxpert\entity\Patient.class
+org\techlab\labxpert\LabXpertApplication.class
+org\techlab\labxpert\entity\Analyse.class
+org\techlab\labxpert\service\I_Utilisateur.class
+org\techlab\labxpert\entity\Norme.class
+org\techlab\labxpert\entity\Utilisateur.class
+org\techlab\labxpert\repository\UtilisateurRepository.class
+org\techlab\labxpert\entity\Fournisseur.class
+org\techlab\labxpert\entity\Echantillon.class
+org\techlab\labxpert\entity\Planification.class
+org\techlab\labxpert\entity\Personne.class
+org\techlab\labxpert\entity\Outil.class
+org\techlab\labxpert\service\serviceImp\UtilisateurServiceImp.class
+org\techlab\labxpert\entity\Reactif.class
+org\techlab\labxpert\entity\Numeration.class
