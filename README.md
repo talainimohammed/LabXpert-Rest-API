@@ -19,7 +19,7 @@ L'objectif principal est d'améliorer l'efficacité et la précision dans le tra
    - Les résultats des analyses sont consignés de manière systématique, permettant un accès rapide aux informations et la possibilité de partager les résultats avec les professionnels de la santé concernés.
 
 #### 4. Gestion des Patients :
-   - Un module dédié offre la possibilité de gérer les informations relatives aux patients, assurant une centralisation des données et une navigation facilitée.
+   - Un  module dédié offre la possibilité de gérer les informations relatives aux patients, assurant une centralisation des données et une navigation facilitée.
 
 #### 5. Inventaire des Réactifs et Outils de travail :
    - Intégration d'un suivi des stocks pour garantir la disponibilité des réactifs nécessaires aux différentes analyses.
