@@ -1,6 +1,8 @@
 package org.techlab.labxpert.service.serviceImp;
 
 
+import org.modelmapper.ModelMapper;
+import org.techlab.labxpert.dtos.UtilisateurDTO;
 import org.techlab.labxpert.entity.Utilisateur;
 import org.techlab.labxpert.repository.UtilisateurRepository;
 import org.techlab.labxpert.service.I_Utilisateur;
@@ -16,30 +18,36 @@ public class UtilisateurServiceImp implements I_Utilisateur {
 
     @Autowired
     private UtilisateurRepository utilisateurRepository;
+
+    ModelMapper modelMapper=new ModelMapper();
     @Override
-    public Utilisateur addUser(Utilisateur user) {
+    public UtilisateurDTO addUser(UtilisateurDTO userdto) {
+        Utilisateur user=modelMapper.map(userdto,Utilisateur.class);
         return utilisateurRepository.save(user);
        // return user;
     }
-
     @Override
-    public Utilisateur modUser(Utilisateur user) {
-        return utilisateurRepository.save(user);
-    }
-
-    @Override
-    public Boolean delUser(Utilisateur user) {
-        return null;
-    }
-
-    @Override
-    public List<Utilisateur> showUsers() {
+    public List<UtilisateurDTO> showUsers() {
         return utilisateurRepository.findAll();
         //return null;
     }
 
     @Override
-    public Utilisateur authentification(String username, String password) {
+    public UtilisateurDTO authentification(String username, String password) {
         return null;
     }
+
+    @Override
+    public UtilisateurDTO modUser(UtilisateurDTO userdto) {
+        return null;
+    }
+
+    @Override
+    public Boolean delUser(UtilisateurDTO userdto) {
+        return null;
+    }
+
+
+
+
 }

@@ -15,13 +15,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @SpringBootApplication
-public class LabXpertApplication implements CommandLineRunner {
+public class LabXpertApplication{
 
 	public static void main(String[] args) {
 		SpringApplication.run(LabXpertApplication.class, args);
 	}
 
-	@Autowired
+	/*@Autowired
 	UtilisateurRepository utilisateurRepository;
 	@Autowired
 	PatientRepository patientRepository;
@@ -105,5 +105,5 @@ public class LabXpertApplication implements CommandLineRunner {
 		fournisseur.setTel("555-1234");
 		fournisseur.setAdresse("123 Main St");
 		//fournisseurRepository.save(fournisseur);
-	}
+	}*/
 }
