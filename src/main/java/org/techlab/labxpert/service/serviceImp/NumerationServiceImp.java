@@ -3,13 +3,17 @@ package org.techlab.labxpert.service.serviceImp;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.techlab.labxpert.dtos.AnalyseDTO;
 import org.techlab.labxpert.dtos.NumerationDTO;
+import org.techlab.labxpert.entity.Analyse;
 import org.techlab.labxpert.entity.Numeration;
 import org.techlab.labxpert.repository.NumerationRepository;
 import org.techlab.labxpert.service.I_Numeration;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class NumerationServiceImp implements I_Numeration {
 
@@ -30,6 +34,12 @@ public class NumerationServiceImp implements I_Numeration {
     }
 
     @Override
+    public NumerationDTO NumerationWithId(Long id) {
+        Numeration numeration=numerationRepository.findById(id).get();
+        return modelMapper.map(numeration,NumerationDTO.class);
+    }
+
+    @Override
     public Boolean delNumeration(NumerationDTO numerationDTO) {
         Numeration numeration=numerationRepository.save(modelMapper.map(numerationDTO,Numeration.class));
         return numeration.getDeleted();
@@ -37,11 +47,15 @@ public class NumerationServiceImp implements I_Numeration {
 
     @Override
     public List<NumerationDTO> allNumerationWithAnalyse(AnalyseDTO analyseDTO) {
-        return null;
+        List<Numeration> numerations=numerationRepository.findByAnalyse(modelMapper.map(analyseDTO, Analyse.class));
+        List<NumerationDTO> numerationDTOS=numerations.stream().map(n->modelMapper.map(n,NumerationDTO.class)).collect(Collectors.toList());
+        return numerationDTOS;
     }
 
     @Override
     public List<NumerationDTO> allNumeration() {
-        return null;
+        List<Numeration> numerations=numerationRepository.findAll();
+        List<NumerationDTO> numerationDTOS=numerations.stream().map(n->modelMapper.map(n,NumerationDTO.class)).collect(Collectors.toList());
+        return numerationDTOS;
     }
 }

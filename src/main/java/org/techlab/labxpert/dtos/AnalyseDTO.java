@@ -15,5 +15,5 @@ public class AnalyseDTO {
     private Date dateDebut;
     private Date dateFin;
     private String commantaire;
-    private Boolean deleted;
+    private Boolean deleted=false;
 }

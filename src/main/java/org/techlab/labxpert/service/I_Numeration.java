@@ -10,6 +10,8 @@ public interface I_Numeration {
 
     NumerationDTO addNumeration(NumerationDTO numerationDTO);
     NumerationDTO modNumeration(NumerationDTO numerationDTO);
+    NumerationDTO NumerationWithId(Long id);
+
     Boolean delNumeration(NumerationDTO numerationDTO);
     List<NumerationDTO> allNumerationWithAnalyse(AnalyseDTO analyseDTO);
     List<NumerationDTO> allNumeration();
