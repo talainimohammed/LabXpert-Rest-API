@@ -1,36 +1,50 @@
 package org.techlab.labxpert.service.serviceImp;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.techlab.labxpert.dtos.EchantillonDTO;
+import org.techlab.labxpert.dtos.UtilisateurDTO;
 import org.techlab.labxpert.entity.Echantillon;
+import org.techlab.labxpert.entity.Utilisateur;
 import org.techlab.labxpert.repository.EchantillonRepository;
 import org.techlab.labxpert.service.I_Echantillon;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EchantillonServiceImp implements I_Echantillon {
     @Autowired
     EchantillonRepository echantillonRepository;
+    ModelMapper modelMapper=new ModelMapper();
     @Override
-    public Echantillon addEchantillon(Echantillon echantillon) {
-
-        return echantillonRepository.save(echantillon);
+    public EchantillonDTO addEchantillon(EchantillonDTO echantillondto) {
+        Echantillon echantillon=echantillonRepository.save(modelMapper.map(echantillondto,Echantillon.class));
+        return modelMapper.map(echantillon,EchantillonDTO.class);
     }
-
     @Override
-    public Echantillon modEchantillon(Echantillon echantillon) {
-        return echantillonRepository.save(echantillon);
+    public List<EchantillonDTO> showEhantillon() {
+        List<Echantillon> echantillons=echantillonRepository.findByDeletedFalse();
+        return echantillons.stream().map(echantillon->modelMapper.map(echantillon,EchantillonDTO.class)).collect(Collectors.toList());
     }
-
     @Override
-    public Boolean delEchantillon(Echantillon echantillon) {
-        echantillonRepository.delete(echantillon);
-        return true;
+    public EchantillonDTO showEchantillonwithid(Long id) {
+        Echantillon echantillon =echantillonRepository.findById(id).get();
+        return modelMapper.map(echantillon,EchantillonDTO.class);
     }
-
     @Override
-    public List<Echantillon> showEchantillons() {
-        return echantillonRepository.findAll();
+    public EchantillonDTO modEchantillon(EchantillonDTO echantillondto) {
+        Echantillon echantillon=echantillonRepository.save(modelMapper.map(echantillondto,Echantillon.class));
+        return modelMapper.map(echantillon,EchantillonDTO.class);
     }
-}
+    @Override
+    public Boolean delEchantillhon(EchantillonDTO echantillondto) {
+        Echantillon echantillon=echantillonRepository.save(modelMapper.map(echantillondto,Echantillon.class));
+        return echantillon.getDeleted();
+    }}
+
+
+
+
+
