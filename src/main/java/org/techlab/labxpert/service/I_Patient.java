@@ -1,13 +1,16 @@
 package org.techlab.labxpert.service;
 
 
+import org.techlab.labxpert.dtos.PatientDTO;
 import org.techlab.labxpert.entity.Patient;
 
 import java.util.List;
 
 public interface I_Patient {
-    public Patient addPatient(Patient patient);
-    public Patient modPatient(Patient patient);
-    public Boolean delPatient(Patient patient);
-    public List<Patient> showPatients();
+    public PatientDTO addPatient(PatientDTO patientdto);
+    public List<PatientDTO> showPatient();
+    public PatientDTO showPatientwithid(Long id);
+    public PatientDTO modPatient(PatientDTO patientdto);
+    public Boolean delPatient(PatientDTO patientdto);
+
 }
