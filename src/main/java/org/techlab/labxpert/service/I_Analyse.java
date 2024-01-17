@@ -1,15 +1,18 @@
 package org.techlab.labxpert.service;
 
 
+import org.techlab.labxpert.dtos.AnalyseDTO;
+import org.techlab.labxpert.dtos.PlanificationDTO;
 import org.techlab.labxpert.entity.Analyse;
 import org.techlab.labxpert.entity.Echantillon;
 
 import java.util.List;
 
 public interface I_Analyse {
-    public Analyse addAnalyse(Analyse analyse);
-    public Analyse modAnalyse(Analyse analyse);
-    public Boolean delAnalyse(Analyse analyse);
-    public List<Analyse> showAnalyses();
-    public Analyse planifierAnalyse(Analyse analyse);
+    public AnalyseDTO addAnalyse(AnalyseDTO analyseDTO);
+    public AnalyseDTO modAnalyse(AnalyseDTO analyseDTO);
+    public Boolean delAnalyse(AnalyseDTO analyseDTO);
+    public List<AnalyseDTO> showAnalyses();
+    public AnalyseDTO showAnalyseWithId(Long id);
+    public PlanificationDTO planifierAnalyse(PlanificationDTO planificationDTO);
 }

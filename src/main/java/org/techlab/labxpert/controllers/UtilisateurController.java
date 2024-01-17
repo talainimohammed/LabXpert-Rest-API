@@ -24,9 +24,19 @@ public class UtilisateurController {
         List<UtilisateurDTO> listusers=i_utilisateur.showUsers();
         return listusers;
     }
+    @GetMapping("{id}")
+    public UtilisateurDTO showUser(@PathVariable(value = "id") Long id_User){
+        UtilisateurDTO user=i_utilisateur.showUserwithid(id_User);
+        return user;
+    }
     @PostMapping
     public ResponseEntity<UtilisateurDTO> addUser(@RequestBody UtilisateurDTO utilisateurDTO){
         UtilisateurDTO utilisateurDTO1=i_utilisateur.addUser(utilisateurDTO);
+        return new ResponseEntity<>(utilisateurDTO1, HttpStatus.CREATED);
+    }
+    @PutMapping
+    public ResponseEntity<UtilisateurDTO> modUser(@RequestBody UtilisateurDTO utilisateurDTO){
+        UtilisateurDTO utilisateurDTO1=i_utilisateur.modUser(utilisateurDTO);
         return new ResponseEntity<>(utilisateurDTO1, HttpStatus.CREATED);
     }
     @DeleteMapping("/{id}")
