@@ -13,7 +13,7 @@ public class Numeration {
     private Long idNumeration;
     private double value;
     private StatutNumeration statut;
-    @OneToOne
+    @ManyToOne
     private Norme norme;
     @ManyToOne
     private Analyse analyse;

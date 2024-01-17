@@ -1,11 +1,15 @@
 package org.techlab.labxpert.controllers;
 
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.techlab.labxpert.dtos.AnalyseDTO;
 import org.techlab.labxpert.dtos.EchantillonDTO;
 import org.techlab.labxpert.dtos.UtilisateurDTO;
+import org.techlab.labxpert.entity.Echantillon;
+import org.techlab.labxpert.service.I_Analyse;
 import org.techlab.labxpert.service.I_Echantillon;
 
 import java.util.HashMap;
@@ -19,6 +23,10 @@ public class EchantillonController {
 
     @Autowired
     I_Echantillon i_echantillon;
+    @Autowired
+    I_Analyse i_analyse;
+    ModelMapper modelMapper=new ModelMapper();
+
     @GetMapping
     public List<EchantillonDTO> showEchantillons() {
         return i_echantillon.showEhantillon();
@@ -46,7 +54,12 @@ public class EchantillonController {
     }
     @PostMapping
     EchantillonDTO addEchantillon( @RequestBody EchantillonDTO echantillondto){
-        return    i_echantillon.addEchantillon( echantillondto);
+        EchantillonDTO echantillonDTO=i_echantillon.addEchantillon(echantillondto);
+        AnalyseDTO analyseDTO=new AnalyseDTO();
+        analyseDTO.setEchantillon(modelMapper.map(echantillonDTO, Echantillon.class));
+        analyseDTO.setNomAnalyse(echantillonDTO.getTypeAnalyse());
+        i_analyse.addAnalyse(analyseDTO);
+        return  echantillonDTO;
 
 
 
