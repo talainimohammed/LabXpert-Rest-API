@@ -15,4 +15,5 @@ public interface I_Analyse {
     public List<AnalyseDTO> showAnalyses();
     public AnalyseDTO showAnalyseWithId(Long id);
     public PlanificationDTO planifierAnalyse(PlanificationDTO planificationDTO);
+    public List<Object[]> printResultRepport(Long id);
 }

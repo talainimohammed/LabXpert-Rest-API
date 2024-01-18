@@ -9,8 +9,11 @@ import org.techlab.labxpert.dtos.AnalyseDTO;
 import org.techlab.labxpert.dtos.EchantillonDTO;
 import org.techlab.labxpert.dtos.UtilisateurDTO;
 import org.techlab.labxpert.entity.Echantillon;
+import org.techlab.labxpert.entity.Outil;
 import org.techlab.labxpert.service.I_Analyse;
 import org.techlab.labxpert.service.I_Echantillon;
+import org.techlab.labxpert.service.I_Outil;
+import org.techlab.labxpert.service.I_Outil_Echantillon;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +28,10 @@ public class EchantillonController {
     I_Echantillon i_echantillon;
     @Autowired
     I_Analyse i_analyse;
+    @Autowired
+    I_Outil_Echantillon i_outil_echantillon;
+    @Autowired
+    I_Outil i_outil;
     ModelMapper modelMapper=new ModelMapper();
 
     @GetMapping
@@ -59,10 +66,12 @@ public class EchantillonController {
         analyseDTO.setEchantillon(modelMapper.map(echantillonDTO, Echantillon.class));
         analyseDTO.setNomAnalyse(echantillonDTO.getTypeAnalyse());
         i_analyse.addAnalyse(analyseDTO);
+        echantillondto.getOutilEchantillonList().forEach(outilEchantillon -> {
+            outilEchantillon.setOutil(modelMapper.map(i_outil.outilById(outilEchantillon.getOutil().getIdOutil()), Outil.class));
+            outilEchantillon.setEchantillon(modelMapper.map(echantillonDTO, Echantillon.class));
+            i_outil_echantillon.add(outilEchantillon);
+        });
         return  echantillonDTO;
-
-
-
     }
 
 }

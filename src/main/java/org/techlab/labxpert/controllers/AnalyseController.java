@@ -1,10 +1,21 @@
 package org.techlab.labxpert.controllers;
 
+import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.techlab.labxpert.dtos.AnalyseDTO;
 import org.techlab.labxpert.dtos.PlanificationDTO;
 import org.techlab.labxpert.service.I_Analyse;
+import org.techlab.labxpert.service.serviceImp.ResultRepport;
+
+import java.io.FileNotFoundException;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +26,8 @@ public class AnalyseController {
     @Autowired
     I_Analyse i_analyse;
 
+    @Autowired
+    ResultRepport resultRepport;
 
     @GetMapping
     public List<AnalyseDTO> getanalyses(){
@@ -25,6 +38,20 @@ public class AnalyseController {
     public AnalyseDTO getanalyse(@PathVariable(value = "id") Long id){
         AnalyseDTO analyse=i_analyse.showAnalyseWithId(id);
         return analyse;
+    }
+    @GetMapping("/pdf")
+    public ResponseEntity<Resource> getpdf() throws JRException, FileNotFoundException, ParseException {
+        byte[] reportContent=resultRepport.exportReport("pdf");
+        ByteArrayResource resource = new ByteArrayResource(reportContent);
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .contentLength(resource.contentLength())
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        ContentDisposition.attachment()
+                                .filename("Resultat.pdf")
+                                .build().toString())
+                .body(resource);
     }
 
     @PutMapping

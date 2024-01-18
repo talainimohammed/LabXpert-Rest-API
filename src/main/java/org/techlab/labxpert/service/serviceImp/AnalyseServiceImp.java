@@ -57,4 +57,9 @@ public class AnalyseServiceImp implements I_Analyse {
         Planification planification=planificationRepository.save(modelMapper.map(planificationDTO,Planification.class));
         return modelMapper.map(planification, PlanificationDTO.class);
     }
+
+    @Override
+    public List<Object[]> printResultRepport(Long id) {
+        return analyseRepository.printAnalyseRepport(id);
+    }
 }
