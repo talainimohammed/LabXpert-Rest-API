@@ -24,17 +24,23 @@ public class UtilisateurServiceImp implements I_Utilisateur {
     @Override
     public UtilisateurDTO addUser(UtilisateurDTO userdto) {
         Utilisateur user=utilisateurRepository.save(modelMapper.map(userdto,Utilisateur.class));
+        user.setPassword("********");
         return modelMapper.map(user,UtilisateurDTO.class);
     }
     @Override
     public List<UtilisateurDTO> showUsers() {
         List<Utilisateur> users=utilisateurRepository.findByDeletedFalse();
-        return users.stream().map(user->modelMapper.map(user,UtilisateurDTO.class)).collect(Collectors.toList());
+        return users.stream().map(user->{
+            UtilisateurDTO utilisateurDTO=modelMapper.map(user,UtilisateurDTO.class);
+            utilisateurDTO.setPassword("**********");
+            return utilisateurDTO;
+        }).collect(Collectors.toList());
     }
 
     @Override
     public UtilisateurDTO showUserwithid(Long id) {
         Utilisateur utilisateur =utilisateurRepository.findById(id).get();
+        utilisateur.setPassword("********");
         return modelMapper.map(utilisateur,UtilisateurDTO.class);
     }
 
@@ -42,12 +48,14 @@ public class UtilisateurServiceImp implements I_Utilisateur {
     public UtilisateurDTO authentification(String username, String password) {
 
         Utilisateur user=utilisateurRepository.findUserByUsernameAndPassword(username,password);
+        user.setPassword("********");
         return modelMapper.map(user,UtilisateurDTO.class);
     }
 
     @Override
     public UtilisateurDTO modUser(UtilisateurDTO userdto) {
         Utilisateur user=utilisateurRepository.save(modelMapper.map(userdto,Utilisateur.class));
+        user.setPassword("********");
         return modelMapper.map(user,UtilisateurDTO.class);
     }
 

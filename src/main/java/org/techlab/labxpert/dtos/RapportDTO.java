@@ -13,7 +13,7 @@ public class RapportDTO {
     private String tel;
     private String adresse;
     private Date date_naissance;
-    private StatutNumeration statut;
+    private String statut;
     private double value;
     private String libelle;
     private double max_value;

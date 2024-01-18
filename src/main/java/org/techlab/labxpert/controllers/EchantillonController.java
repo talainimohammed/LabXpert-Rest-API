@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.techlab.labxpert.dtos.AnalyseDTO;
 import org.techlab.labxpert.dtos.EchantillonDTO;
+import org.techlab.labxpert.dtos.OutilDTO;
 import org.techlab.labxpert.dtos.UtilisateurDTO;
 import org.techlab.labxpert.entity.Echantillon;
 import org.techlab.labxpert.entity.Outil;
@@ -70,7 +71,11 @@ public class EchantillonController {
             outilEchantillon.setOutil(modelMapper.map(i_outil.outilById(outilEchantillon.getOutil().getIdOutil()), Outil.class));
             outilEchantillon.setEchantillon(modelMapper.map(echantillonDTO, Echantillon.class));
             i_outil_echantillon.add(outilEchantillon);
+            OutilDTO outilDTO=modelMapper.map(outilEchantillon.getOutil(),OutilDTO.class);
+            outilDTO.setQuantite(outilDTO.getQuantite()-outilEchantillon.getQuantite());
+            i_outil.modOutil(outilDTO);
         });
+
         return  echantillonDTO;
     }
 

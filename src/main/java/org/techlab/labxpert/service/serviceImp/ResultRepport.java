@@ -25,9 +25,9 @@ import java.util.*;
 public class ResultRepport {
     @Autowired
     I_Analyse i_analyse;
-    public byte[] exportReport(String reportFormat) throws FileNotFoundException, JRException, ParseException {
+    public byte[] exportReport(Long id) throws FileNotFoundException, JRException, ParseException {
         String path = "D:\\Simplon Tasks";
-        List<Object[]> results = i_analyse.printResultRepport(7L);
+        List<Object[]> results = i_analyse.printResultRepport(id);
         List<RapportDTO> rapportDTOS=new ArrayList<>();
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
         for (Object[] result : results) {
@@ -39,7 +39,7 @@ public class ResultRepport {
             rapportDTO.setAdresse(result[4].toString());
             Date date = inputFormat.parse(result[5].toString());
             rapportDTO.setDate_naissance(date);
-            rapportDTO.setStatut(StatutNumeration.valueOf(result[6].toString()));
+            rapportDTO.setStatut(StatutNumeration.valueOf(result[6].toString()).toString());
             rapportDTO.setValue(Double.parseDouble(result[7].toString()));
             rapportDTO.setLibelle(result[8].toString());
             rapportDTO.setMax_value(Double.parseDouble(result[9].toString()));
@@ -49,11 +49,11 @@ public class ResultRepport {
             /*for (Object field : result) {
                 System.out.print(field + " ");
             }
-            System.out.println();*/ // Move to the next line for a new row
+            System.out.println();*/
         }
         //System.out.println(rapportDTOS);
         //load file and compile it
-        File file = ResourceUtils.getFile("classpath:Coffee.jrxml");
+        File file = ResourceUtils.getFile("classpath:ResultatRapport.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(rapportDTOS);
         Map<String, Object> parameters = new HashMap<>();

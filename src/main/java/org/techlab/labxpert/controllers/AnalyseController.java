@@ -39,9 +39,9 @@ public class AnalyseController {
         AnalyseDTO analyse=i_analyse.showAnalyseWithId(id);
         return analyse;
     }
-    @GetMapping("/pdf")
-    public ResponseEntity<Resource> getpdf() throws JRException, FileNotFoundException, ParseException {
-        byte[] reportContent=resultRepport.exportReport("pdf");
+    @GetMapping("/pdf/{id}")
+    public ResponseEntity<Resource> getpdf(@PathVariable(value = "id") Long id_Analyse) throws JRException, FileNotFoundException, ParseException {
+        byte[] reportContent=resultRepport.exportReport(id_Analyse);
         ByteArrayResource resource = new ByteArrayResource(reportContent);
 
         return ResponseEntity.ok()
