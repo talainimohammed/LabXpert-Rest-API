@@ -1,9 +1,11 @@
 package org.techlab.labxpert.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
 @Data
+@AllArgsConstructor
 @Entity
 @Table(name="fournisseurs")
 public class Fournisseur {
