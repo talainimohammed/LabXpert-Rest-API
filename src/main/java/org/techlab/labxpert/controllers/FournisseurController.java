@@ -40,7 +40,7 @@ public class FournisseurController {
     @DeleteMapping("{id}")
     public HashMap<String,Boolean> delFournisseur(@PathVariable(value = "id") Long id_fournisseur){
         FournisseurDTO fournisseurDTO=i_fournisseur.getFournisseur(id_fournisseur);
-        fournisseurDTO.setDeleted(Boolean.TRUE);
+        //fournisseurDTO.setDeleted(Boolean.TRUE);
         HashMap<String,Boolean> response=new HashMap<>();
         if(i_fournisseur.delFournisseur(fournisseurDTO)){
             response.put("delete",Boolean.TRUE);

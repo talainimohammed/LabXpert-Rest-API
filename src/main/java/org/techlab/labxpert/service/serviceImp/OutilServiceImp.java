@@ -37,6 +37,7 @@ public class OutilServiceImp implements I_Outil {
 
     @Override
     public Boolean delOutil(OutilDTO outilDTO) {
+        outilDTO.setDeleted(Boolean.TRUE);
         Outil outil=outilRepository.save(modelMapper.map(outilDTO,Outil.class));
         return outil.getDeleted();
     }

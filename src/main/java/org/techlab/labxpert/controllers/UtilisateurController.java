@@ -42,7 +42,6 @@ public class UtilisateurController {
     @DeleteMapping("/{id}")
     public Map<String,Boolean> delUser(@PathVariable(value = "id") Long id_utilisateur ){
         UtilisateurDTO utilisateurDTO=i_utilisateur.showUserwithid(id_utilisateur);
-        utilisateurDTO.setDeleted(true);
         Map<String,Boolean> response=new HashMap<>();
         if(i_utilisateur.delUser(utilisateurDTO)){
             response.put("deleted",Boolean.TRUE);

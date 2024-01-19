@@ -53,7 +53,7 @@ public class EchantillonController {
     @DeleteMapping("/{id}")
     public Map<String,Boolean> delUser(@PathVariable(value = "id") Long id ){
         EchantillonDTO echantillonDTO= i_echantillon.showEchantillonwithid( id);
-        echantillonDTO.setDeleted(true);
+        //echantillonDTO.setDeleted(true);
         Map<String,Boolean> response=new HashMap<>();
         if(i_echantillon.delEchantillhon(echantillonDTO)){
             response.put("deleted",Boolean.TRUE);

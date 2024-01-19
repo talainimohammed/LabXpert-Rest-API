@@ -29,7 +29,7 @@ public class NormeController {
     @DeleteMapping("/{id}")
     public HashMap<String,Boolean> delNorme(@PathVariable(value = "id") Long id){
         NormeDTO normeDTO=i_norme.getNormeById(id);
-        normeDTO.setDeleted(Boolean.TRUE);
+        //normeDTO.setDeleted(Boolean.TRUE);
         HashMap<String,Boolean> response=new HashMap<>();
         if(i_norme.delNorme(normeDTO)){
             response.put("deleted",Boolean.TRUE);

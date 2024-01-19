@@ -2,10 +2,7 @@ package org.techlab.labxpert.dtos;
 
 import lombok.Data;
 import org.techlab.labxpert.Enum.StatutEchantillon;
-import org.techlab.labxpert.entity.OutilEchantillon;
-import org.techlab.labxpert.entity.Patient;
-import org.techlab.labxpert.entity.Echantillon;
-import org.techlab.labxpert.entity.Utilisateur;
+import org.techlab.labxpert.entity.*;
 
 import java.util.Collection;
 import java.util.Date;
@@ -19,6 +16,7 @@ public class EchantillonDTO {
     private Date datePrelevement;
     private String typeAnalyse;
     private StatutEchantillon Status;
+    private Collection<Analyse> analyses;
     private Collection<OutilEchantillon> outilEchantillonList;
     private Boolean deleted=false;
 }

@@ -45,7 +45,7 @@ public class PatientController {
     @DeleteMapping("/{id}")
     public Map<String,Boolean> delPatient(@PathVariable(value = "id") Long id_patient ){
         PatientDTO patientDTO=i_patient.showPatientwithid(id_patient);
-        patientDTO.setDeleted(true);
+        //patientDTO.setDeleted(true);
         Map<String,Boolean> response=new HashMap<>();
         if(i_patient.delPatient(patientDTO)){
             response.put("deleted",Boolean.TRUE);

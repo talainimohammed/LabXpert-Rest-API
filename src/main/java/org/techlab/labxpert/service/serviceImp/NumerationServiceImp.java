@@ -41,6 +41,7 @@ public class NumerationServiceImp implements I_Numeration {
 
     @Override
     public Boolean delNumeration(NumerationDTO numerationDTO) {
+        numerationDTO.setDeleted(Boolean.TRUE);
         Numeration numeration=numerationRepository.save(modelMapper.map(numerationDTO,Numeration.class));
         return numeration.getDeleted();
     }

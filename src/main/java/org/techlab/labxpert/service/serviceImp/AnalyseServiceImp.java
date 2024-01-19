@@ -35,6 +35,7 @@ public class AnalyseServiceImp implements I_Analyse {
 
     @Override
     public Boolean delAnalyse(AnalyseDTO analyseDTO) {
+        analyseDTO.setDeleted(Boolean.TRUE);
         Analyse analyse=analyseRepository.save(modelMapper.map(analyseDTO,Analyse.class));
         return analyse.getDeleted();
     }

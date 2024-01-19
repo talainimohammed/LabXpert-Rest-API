@@ -34,7 +34,7 @@ public class OutilController {
     @DeleteMapping("/{id}")
     public HashMap<String,Boolean> delOutil(@PathVariable(value = "id") Long id_outil){
         OutilDTO outilDTO=i_outil.outilById(id_outil);
-        outilDTO.setDeleted(Boolean.TRUE);
+        //outilDTO.setDeleted(Boolean.TRUE);
         HashMap<String,Boolean> response=new HashMap<>();
         if(i_outil.delOutil(outilDTO)){
             response.put("delete",Boolean.TRUE);

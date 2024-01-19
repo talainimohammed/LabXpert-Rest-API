@@ -61,6 +61,7 @@ public class UtilisateurServiceImp implements I_Utilisateur {
 
     @Override
     public Boolean delUser(UtilisateurDTO userdto) {
+        userdto.setDeleted(true);
         Utilisateur user=utilisateurRepository.save(modelMapper.map(userdto,Utilisateur.class));
         return user.getDeleted();
     }

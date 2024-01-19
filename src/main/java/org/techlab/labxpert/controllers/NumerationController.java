@@ -46,7 +46,7 @@ public class NumerationController {
     @DeleteMapping("/{id}")
     public HashMap<String,Boolean> deleteNumeration(@PathVariable(value = "id") Long id){
         NumerationDTO numerationDTO=i_numeration.NumerationWithId(id);
-        numerationDTO.setDeleted(Boolean.TRUE);
+        //numerationDTO.setDeleted(Boolean.TRUE);
         HashMap<String,Boolean> response=new HashMap<>();
         if(i_numeration.delNumeration(numerationDTO)){
             response.put("deleted",Boolean.TRUE);

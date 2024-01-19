@@ -45,6 +45,7 @@ public class EchantillonServiceImp implements I_Echantillon {
     }
     @Override
     public Boolean delEchantillhon(EchantillonDTO echantillondto) {
+        echantillondto.setDeleted(true);
         Echantillon echantillon=echantillonRepository.save(modelMapper.map(echantillondto,Echantillon.class));
         return echantillon.getDeleted();
     }

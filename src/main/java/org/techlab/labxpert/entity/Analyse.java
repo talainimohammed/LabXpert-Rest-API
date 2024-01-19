@@ -22,4 +22,15 @@ public class Analyse {
 
     public Analyse() {
     }
+
+    @Override
+    public String toString() {
+        return "Analyse{" +
+                "idAnalyse=" + idAnalyse +
+                ", nomAnalyse='" + nomAnalyse + '\'' +
+                ", dateDebut=" + dateDebut +
+                ", dateFin=" + dateFin +
+                ", commantaire='" + commantaire + '\'' +
+                '}';
+    }
 }
