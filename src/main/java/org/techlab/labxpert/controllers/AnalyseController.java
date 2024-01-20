@@ -1,5 +1,6 @@
 package org.techlab.labxpert.controllers;
 
+
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -26,6 +27,10 @@ public class AnalyseController {
     @Autowired
     I_Analyse i_analyse;
 
+
+
+
+
     @Autowired
     ResultRepport resultRepport;
 
@@ -40,7 +45,7 @@ public class AnalyseController {
         return analyse;
     }
     @GetMapping("/pdf/{id}")
-    public ResponseEntity<Resource> getpdf(@PathVariable(value = "id") Long id_Analyse) throws JRException, FileNotFoundException, ParseException {
+    public ResponseEntity<Resource> getpdf(@PathVariable(value = "id") Long id_Analyse) throws FileNotFoundException, ParseException, JRException {
         byte[] reportContent=resultRepport.exportReport(id_Analyse);
         ByteArrayResource resource = new ByteArrayResource(reportContent);
 
@@ -72,7 +77,14 @@ public class AnalyseController {
 
     @PostMapping("/planification")
     public PlanificationDTO affectAnalyse(@RequestBody PlanificationDTO planificationDTO){
-        planificationDTO=i_analyse.planifierAnalyse(planificationDTO);
+
+       /* planificationDTO=i_analyse.planifierAnalyse(planificationDTO);*/
         return planificationDTO;
-    }
+
+}
+
+
+
+
+
 }
