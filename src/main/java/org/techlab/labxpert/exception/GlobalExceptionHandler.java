@@ -14,6 +14,7 @@ public class GlobalExceptionHandler {
         exc.setStatus(HttpStatus.BAD_REQUEST.value());
         exc.setMessage(exception.getMessage());
         exc.setTimeStamp(System.currentTimeMillis());
+        System.out.println(exception);
         return new ResponseEntity<>(exc,HttpStatus.BAD_REQUEST);
     }
 }

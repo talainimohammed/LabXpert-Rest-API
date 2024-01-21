@@ -2,6 +2,7 @@ package org.techlab.labxpert.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +14,7 @@ import java.util.List;
 @Entity
 @Table(name="patients")
 public class Patient extends Personne{
-
+    @ToString.Exclude
     @JsonManagedReference
     @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER)
     private List<Echantillon> echantillons;

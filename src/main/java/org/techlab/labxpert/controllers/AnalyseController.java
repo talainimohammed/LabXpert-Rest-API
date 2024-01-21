@@ -69,7 +69,11 @@ public class AnalyseController {
 
     @PutMapping
     public ResponseEntity<AnalyseDTO> updateAnalyse(@RequestBody AnalyseDTO analyseDTO){
-        AnalyseDTO analyseDTO1=i_analyse.modAnalyse(analyseDTO);
+        AnalyseDTO analyseDTO1=i_analyse.showAnalyseWithId(analyseDTO.getIdAnalyse());
+        analyseDTO1.setDateFin(analyseDTO.getDateFin());
+        analyseDTO1.setDateDebut(analyseDTO.getDateDebut());
+        analyseDTO1.setCommantaire(analyseDTO.getCommantaire());
+        analyseDTO1=i_analyse.modAnalyse(analyseDTO1);
         System.out.println(analyseDTO1);
         return new ResponseEntity<>(analyseDTO1, HttpStatus.OK);
     }

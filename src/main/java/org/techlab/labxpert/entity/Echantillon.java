@@ -17,6 +17,7 @@ public class Echantillon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEchantillon;
+    @ToString.Exclude
     @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
     private Patient patient;
@@ -25,6 +26,7 @@ public class Echantillon {
     private Date datePrelevement;
     private String typeAnalyse;
     private StatutEchantillon Status;
+    @ToString.Exclude
     @JsonManagedReference
     @OneToMany(mappedBy = "echantillon", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Collection<Analyse> analyses;
