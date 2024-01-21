@@ -17,6 +17,5 @@ public class ReactifDTO {
     private int quantite;
     private Date dateExpiration;
     private Fournisseur fournisseur;
-
-    private Boolean deleted;
+    private Boolean deleted=false;
 }

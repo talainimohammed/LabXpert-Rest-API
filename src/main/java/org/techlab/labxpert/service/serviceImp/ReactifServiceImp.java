@@ -46,6 +46,7 @@ public class ReactifServiceImp implements I_Reactif {
     }
     @Override
     public Boolean delReactif(ReactifDTO reactifdto) {
+        reactifdto.setDeleted(Boolean.TRUE);
         Reactif reactif=reactifRepository.save(modelMapper.map(reactifdto,Reactif.class));
         return reactif.getDeleted();
     }

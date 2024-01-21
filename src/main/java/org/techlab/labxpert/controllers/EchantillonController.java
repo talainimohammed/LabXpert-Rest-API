@@ -5,6 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.techlab.labxpert.dtos.AnalyseDTO;
 import org.techlab.labxpert.dtos.EchantillonDTO;
 import org.techlab.labxpert.dtos.OutilDTO;
@@ -21,8 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/V2/Echantillon")
-
+@RequestMapping("/api/v1/echantillon")
 public class EchantillonController {
 
     @Autowired
@@ -63,10 +63,15 @@ public class EchantillonController {
     @PostMapping
     EchantillonDTO addEchantillon( @RequestBody EchantillonDTO echantillondto){
         EchantillonDTO echantillonDTO=i_echantillon.addEchantillon(echantillondto);
+        /*String uri="http://localhost:8080/api/v1/analyse/echantillon/"+echantillonDTO.getIdEchantillon();
+        RestTemplate restTemplate=new RestTemplate();
+        AnalyseDTO analyseDTO=restTemplate.getForObject(uri,AnalyseDTO.class);
+        System.out.println(analyseDTO);*/
         AnalyseDTO analyseDTO=new AnalyseDTO();
         analyseDTO.setEchantillon(modelMapper.map(echantillonDTO, Echantillon.class));
         analyseDTO.setNomAnalyse(echantillonDTO.getTypeAnalyse());
         i_analyse.addAnalyse(analyseDTO);
+        if(echantillondto.getOutilEchantillonList()!=null){
         echantillondto.getOutilEchantillonList().forEach(outilEchantillon -> {
             outilEchantillon.setOutil(modelMapper.map(i_outil.outilById(outilEchantillon.getOutil().getIdOutil()), Outil.class));
             outilEchantillon.setEchantillon(modelMapper.map(echantillonDTO, Echantillon.class));
@@ -75,6 +80,7 @@ public class EchantillonController {
             outilDTO.setQuantite(outilDTO.getQuantite()-outilEchantillon.getQuantite());
             i_outil.modOutil(outilDTO);
         });
+        }
 
         return  echantillonDTO;
     }

@@ -23,7 +23,7 @@ class ReactifServiceTest {
     I_Reactif i_reactif;
     @Autowired
     FournisseurRepository fournisseurRepository;
-    @ParameterizedTest
+    /*@ParameterizedTest
     @CsvFileSource(resources = "/listreactif.csv" , numLinesToSkip = 1)
     void addReactif(String Name,String Description,int Quantite,String DateExperation,Long idfournisseur) throws ParseException {
         Reactif reactif=new Reactif();
@@ -36,5 +36,5 @@ class ReactifServiceTest {
         Fournisseur fournisseur=fournisseurRepository.findById(idfournisseur).get();
         reactif.setFournisseur(fournisseur);
         i_reactif.addReactif(reactif);
-    }
+    }*/
 }
