@@ -145,6 +145,7 @@ class AnalyseControllerTest {
 
     @Test
     void updateAnalyse() throws Exception {
+        when(i_analyse.showAnalyseWithId(1L)).thenReturn(analyseDTO);
         analyseDTO.setCommantaire("analyse a faire urgent");
         analyseDTO.setDateDebut(inputFormat.parse("2024-01-19"));
         analyseDTO.setDateFin(inputFormat.parse("2024-01-19"));
