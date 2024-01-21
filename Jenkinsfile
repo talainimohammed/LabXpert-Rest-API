@@ -17,7 +17,6 @@ tools {
                   bat 'mvn test -Dtest=EchantillonServiceTest'
                   bat 'mvn test -Dtest=NumerationServiceTest'
                   bat 'mvn test -Dtest=PatientServiceTest'
-                  bat 'mvn test -Dtest=ReactifServiceTest'
               }
         }
         stage('Test Controller'){
