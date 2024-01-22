@@ -27,7 +27,7 @@ tools {
                           bat 'mvn test -Dtest=NumerationControllerTest'
                           bat 'mvn test -Dtest=ReactifControllerTest'
                           bat 'mvn test -Dtest=NormeControlersTest'
-                          bat 'mvn test -Dtest=PatientControllerTest'
+                          bat 'mvn test -Dtest=PatientControlersTest'
                           bat 'mvn test -Dtest=UtilisateurControlersTest'
                           bat 'mvn test -Dtest=EchantillonControllersTest'
                       }
