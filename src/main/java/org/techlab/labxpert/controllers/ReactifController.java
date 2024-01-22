@@ -42,7 +42,7 @@ public class ReactifController {
     @DeleteMapping("/{id}")
     public Map<String,Boolean> delReactif(@PathVariable(value = "id") Long id_reactif ){
         ReactifDTO reactifDTO=i_reactif.showReactifwithid(id_reactif);
-        reactifDTO.setDeleted(true);
+      //  reactifDTO.setDeleted(true);
         Map<String,Boolean> response=new HashMap<>();
         if(i_reactif.delReactif(reactifDTO)){
             response.put("deleted",Boolean.TRUE);

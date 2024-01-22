@@ -1,8 +1,10 @@
 package org.techlab.labxpert.dtos;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class NormeDTO {
     private Long idNorme;
     private String libelle;

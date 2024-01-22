@@ -3,6 +3,7 @@ package org.techlab.labxpert.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.techlab.labxpert.dtos.AnalyseDTO;
@@ -47,7 +48,7 @@ public class EchantillonController {
     @PutMapping
     public ResponseEntity<EchantillonDTO> modEchantillon(@RequestBody EchantillonDTO echantillonDTO) {
         EchantillonDTO modifiedEchantillon = i_echantillon.modEchantillon(echantillonDTO);
-        return ResponseEntity.ok().body(modifiedEchantillon);
+        return new ResponseEntity<>(modifiedEchantillon, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
@@ -61,12 +62,13 @@ public class EchantillonController {
         return response;
     }
     @PostMapping
-    EchantillonDTO addEchantillon( @RequestBody EchantillonDTO echantillondto){
+    ResponseEntity<EchantillonDTO> addEchantillon( @RequestBody EchantillonDTO echantillondto){
         EchantillonDTO echantillonDTO=i_echantillon.addEchantillon(echantillondto);
         AnalyseDTO analyseDTO=new AnalyseDTO();
         analyseDTO.setEchantillon(modelMapper.map(echantillonDTO, Echantillon.class));
         analyseDTO.setNomAnalyse(echantillonDTO.getTypeAnalyse());
         i_analyse.addAnalyse(analyseDTO);
+        if(echantillondto.getOutilEchantillonList()!=null){
         echantillondto.getOutilEchantillonList().forEach(outilEchantillon -> {
             outilEchantillon.setOutil(modelMapper.map(i_outil.outilById(outilEchantillon.getOutil().getIdOutil()), Outil.class));
             outilEchantillon.setEchantillon(modelMapper.map(echantillonDTO, Echantillon.class));
@@ -74,9 +76,9 @@ public class EchantillonController {
             OutilDTO outilDTO=modelMapper.map(outilEchantillon.getOutil(),OutilDTO.class);
             outilDTO.setQuantite(outilDTO.getQuantite()-outilEchantillon.getQuantite());
             i_outil.modOutil(outilDTO);
-        });
+        });}
 
-        return  echantillonDTO;
+        return new ResponseEntity<>(echantillonDTO, HttpStatus.CREATED);
     }
 
 }

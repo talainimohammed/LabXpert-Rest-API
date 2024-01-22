@@ -21,7 +21,7 @@ public class ReactifDTO {
     private Date dateExpiration;
     private Fournisseur fournisseur;
 
-    private Boolean deleted;
+    private Boolean deleted=false;
 
     public ReactifDTO(String nom, String description, int quantite, Date dateExpiration, Fournisseur fournisseur) {
         this.nom = nom;
