@@ -5,8 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.techlab.labxpert.Enum.StatutNumeration;
 import org.techlab.labxpert.dtos.AnalyseDTO;
+import org.techlab.labxpert.dtos.NormeDTO;
 import org.techlab.labxpert.dtos.NumerationDTO;
+import org.techlab.labxpert.entity.Norme;
 import org.techlab.labxpert.service.I_Analyse;
 import org.techlab.labxpert.service.I_Numeration;
 import java.util.HashMap;
@@ -33,6 +36,12 @@ public class NumerationController {
     }
     @PostMapping
     public ResponseEntity<NumerationDTO> addNumeration(@RequestBody NumerationDTO numerationDTO){
+        Norme norme=numerationDTO.getNorme();
+        if(numerationDTO.getValue()>=norme.getMinValue() && numerationDTO.getValue()<= norme.getMaxValue()){
+            numerationDTO.setStatut(StatutNumeration.Normal);
+        }else {
+            numerationDTO.setStatut(StatutNumeration.Anormal);
+        }
         NumerationDTO numerationDTO1=i_numeration.addNumeration(numerationDTO);
         return new ResponseEntity<>(numerationDTO1, HttpStatus.CREATED);
     }
