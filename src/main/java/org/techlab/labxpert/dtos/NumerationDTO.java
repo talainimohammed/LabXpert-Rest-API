@@ -8,12 +8,17 @@ import org.techlab.labxpert.entity.Norme;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+
 @Data
 public class NumerationDTO {
     private Long idNumeration;
     private double value;
+    @NotNull(message="nom null")
     private StatutNumeration statut;
+    @NotNull(message="nom null")
     private Norme norme;
+    @NotNull(message="nom null")
     private Analyse analyse;
-    private Boolean deleted=false;
+    private boolean deleted;
 }
