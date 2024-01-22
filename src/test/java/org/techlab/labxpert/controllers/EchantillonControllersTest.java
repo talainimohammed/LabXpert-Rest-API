@@ -40,11 +40,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 public class EchantillonControllersTest {
     @MockBean
-  EchantillonServiceImp echantillonServiceImp;
+    EchantillonServiceImp echantillonServiceImp;
     @Autowired
     MockMvc mockMvc;
     @MockBean
-     I_Analyse i_analyse;
+    I_Analyse i_analyse;
     @MockBean
     I_Patient i_patient;
     @MockBean
@@ -107,7 +107,7 @@ public class EchantillonControllersTest {
     @Test
     public void test_saveEchantillon() throws Exception {
         when(echantillonServiceImp.addEchantillon(echantillonDTO)).thenReturn(echantillonDTO);
-        mockMvc.perform(post("/api/V2/Echantillon")
+        mockMvc.perform(post("/api/v1/echantillon")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(echantillonDTO)))
                 .andExpect(status().isCreated());
@@ -117,7 +117,7 @@ public class EchantillonControllersTest {
         List<EchantillonDTO> echantillonList =new ArrayList<>();
 
         when(echantillonServiceImp.showEhantillon()).thenReturn(echantillonList);
-        mockMvc.perform(get("/api/V2/Echantillon")
+        mockMvc.perform(get("/api/v1/echantillon")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(print());
@@ -127,7 +127,7 @@ public class EchantillonControllersTest {
         // Mock the behavior of delNorme to do nothing when called with normeDTO
         doReturn(null).when(echantillonServiceImp).delEchantillhon(echantillonDTO);
 
-        mockMvc.perform(delete("/api/V2/Echantillon/{id}", 1)  // Replace '1' with the actual ID
+        mockMvc.perform(delete("/api/v1/echantillon/{id}", 1)  // Replace '1' with the actual ID
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(echantillonDTO)))
                 .andExpect(status().isOk());
@@ -135,7 +135,7 @@ public class EchantillonControllersTest {
     @Test
     public void test_modEchantillon() throws Exception {
         when(echantillonServiceImp.modEchantillon(echantillonDTO)).thenReturn(echantillonDTO);
-        mockMvc.perform(put("/api/V2/Echantillon")
+        mockMvc.perform(put("/api/v1/echantillon")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(echantillonDTO)))
                 .andExpect(status().isCreated());
