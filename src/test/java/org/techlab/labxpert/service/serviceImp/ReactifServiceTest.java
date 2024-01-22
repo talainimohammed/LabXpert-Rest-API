@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.techlab.labxpert.dtos.EchantillonDTO;
 import org.techlab.labxpert.dtos.ReactifDTO;
 import org.techlab.labxpert.entity.Fournisseur;
 import org.techlab.labxpert.entity.Numeration;
@@ -67,8 +68,19 @@ class ReactifServiceTest {
         assertNotNull(reactifDTO2);
     }
     @Test
+    void showReactifwithId(){
+        ReactifDTO reactif1= i_reactif.addReactif( reactifDTO);
+        ReactifDTO reactifDTO3=i_reactif.showReactifwithid(reactif1.getIdReactif());
+        assertNotNull( reactifDTO3);
+    }
+
+    @Test
+    void delReactif() {
+        ReactifDTO reactifDTO1=i_reactif.addReactif(reactifDTO);
 
 
+        assertTrue(i_reactif.delReactif(reactifDTO1));
+    }
 
 
 

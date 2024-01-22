@@ -1,5 +1,7 @@
 package org.techlab.labxpert.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.ToString;
 import org.techlab.labxpert.Enum.StatutEchantillon;
@@ -15,19 +17,22 @@ public class Echantillon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEchantillon;
-    @ManyToOne
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
     private Patient patient;
     @ManyToOne
     private Utilisateur utilisateur;
     private Date datePrelevement;
     private String typeAnalyse;
     private StatutEchantillon Status;
-    @ToString.Exclude
-    @OneToMany(mappedBy = "echantillon", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @OneToMany(mappedBy = "echantillon", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Collection<Analyse> analyses;
     @Column(name="is_deleted")
     private Boolean deleted;
 
     public Echantillon() {
     }
+
+
 }
