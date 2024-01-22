@@ -26,9 +26,10 @@ tools {
                           bat 'mvn test -Dtest=AnalyseControllerTest'
                           bat 'mvn test -Dtest=NumerationControllerTest'
                           bat 'mvn test -Dtest=ReactifControllerTest'
-                          bat 'mvn test -Dtest=NormeControllerTest'
+                          bat 'mvn test -Dtest=NormeControlersTest'
                           bat 'mvn test -Dtest=PatientControllerTest'
-                          bat 'mvn test -Dtest=UtilisateurControllerTest'
+                          bat 'mvn test -Dtest=UtilisateurControlersTest'
+                          bat 'mvn test -Dtest=EchantillonControllersTest'
                       }
         }
   }
