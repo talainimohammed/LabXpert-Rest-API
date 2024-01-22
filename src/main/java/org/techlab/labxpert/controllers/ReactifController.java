@@ -8,6 +8,7 @@ import org.techlab.labxpert.dtos.ReactifDTO;
 import org.techlab.labxpert.dtos.UtilisateurDTO;
 import org.techlab.labxpert.service.I_Reactif;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,12 +30,12 @@ public class ReactifController {
         return new ResponseEntity<>(reactif,HttpStatus.OK);
     }
     @PostMapping
-    public ResponseEntity<ReactifDTO> addReactif(@RequestBody ReactifDTO reactifDTO){
+    public ResponseEntity<ReactifDTO> addReactif(@RequestBody @Valid ReactifDTO reactifDTO){
     ReactifDTO ReactifDTO1=i_reactif.addReactif(reactifDTO);
         return new ResponseEntity<>( ReactifDTO1, HttpStatus.CREATED);
     }
     @PutMapping
-    public ResponseEntity<ReactifDTO> modRactif(@RequestBody ReactifDTO reactifDTO){
+    public ResponseEntity<ReactifDTO> modRactif(@RequestBody @Valid ReactifDTO reactifDTO){
         ReactifDTO reactifDTO1  =i_reactif.modReactif(reactifDTO);
         return new ResponseEntity<>(reactifDTO1, HttpStatus.OK);
     }

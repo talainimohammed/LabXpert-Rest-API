@@ -137,6 +137,10 @@ and echantillons.patient_id=patients.id;]]>
 				</textElement>
 				<text><![CDATA[COMPTE RENDU D'ANALYSES DE BIOLOGIE MEDICALE]]></text>
 			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="110" height="110" uuid="0bb4ef13-63b7-43e3-afdc-e3d8d11e601b"/>
+				<imageExpression><![CDATA["https://professional-labo.com/wp-content/uploads/2021/04/logo-professional-labo-menu.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -186,7 +190,7 @@ and echantillons.patient_id=patients.id;]]>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="50" splitType="Stretch">
+		<band height="29" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="5" width="100" height="21" uuid="999c3136-8b6c-4c83-99c6-b43a263bf8ec"/>
 				<textFieldExpression><![CDATA[$F{libelle}]]></textFieldExpression>
@@ -228,7 +232,7 @@ and echantillons.patient_id=patients.id;]]>
 	<columnFooter>
 		<band height="53" splitType="Stretch">
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="fa45a887-615a-4d84-a2d7-8a2219671b3c"/>
+				<reportElement positionType="FixRelativeToBottom" x="-3" y="10" width="555" height="1" uuid="fa45a887-615a-4d84-a2d7-8a2219671b3c"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>

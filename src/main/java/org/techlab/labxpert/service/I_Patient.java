@@ -11,6 +11,6 @@ public interface I_Patient {
     public List<PatientDTO> showPatient();
     public PatientDTO showPatientwithid(Long id);
     public PatientDTO modPatient(PatientDTO patientdto);
-    public Boolean delPatient(PatientDTO patientdto);
+    public boolean delPatient(PatientDTO patientdto);
 
 }

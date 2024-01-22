@@ -15,7 +15,7 @@ public class Norme {
     private double maxValue;
     private double minValue;
     @Column(name="is_deleted")
-    private Boolean deleted;
+    private boolean deleted;
 
 
 }

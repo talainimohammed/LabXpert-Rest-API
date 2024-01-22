@@ -18,5 +18,5 @@ public class AnalyseDTO {
     private Date dateFin;
     private String commantaire;
     private Collection<ReactifAnalyse> reactifAnalyseList;
-    private Boolean deleted=false;
+    private boolean deleted;
 }

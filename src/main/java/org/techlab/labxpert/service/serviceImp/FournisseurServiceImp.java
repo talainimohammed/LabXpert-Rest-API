@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 public class FournisseurServiceImp implements I_Fournisseur {
     @Autowired
     FournisseurRepository fournisseurRepository;
-
-    ModelMapper modelMapper =new ModelMapper();
+    @Autowired
+    ModelMapper modelMapper;
     @Override
     public FournisseurDTO addFournisseur(FournisseurDTO fournisseurDTO) {
         return modelMapper.map(fournisseurRepository.save(modelMapper.map(fournisseurDTO, Fournisseur.class)),FournisseurDTO.class);
@@ -33,7 +33,7 @@ public class FournisseurServiceImp implements I_Fournisseur {
     }
 
     @Override
-    public Boolean delFournisseur(FournisseurDTO fournisseurDTO) {
+    public boolean delFournisseur(FournisseurDTO fournisseurDTO) {
         fournisseurDTO.setDeleted(Boolean.TRUE);
         FournisseurDTO fournisseurDTO1=modelMapper.map(fournisseurRepository.save(modelMapper.map(fournisseurDTO, Fournisseur.class)),FournisseurDTO.class);
         return fournisseurDTO1.getDeleted();

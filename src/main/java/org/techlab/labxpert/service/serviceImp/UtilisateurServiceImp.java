@@ -19,8 +19,8 @@ public class UtilisateurServiceImp implements I_Utilisateur {
 
     @Autowired
     private UtilisateurRepository utilisateurRepository;
-
-    ModelMapper modelMapper=new ModelMapper();
+    @Autowired
+    ModelMapper modelMapper;
     @Override
     public UtilisateurDTO addUser(UtilisateurDTO userdto) {
         Utilisateur user=utilisateurRepository.save(modelMapper.map(userdto,Utilisateur.class));
@@ -60,10 +60,10 @@ public class UtilisateurServiceImp implements I_Utilisateur {
     }
 
     @Override
-    public Boolean delUser(UtilisateurDTO userdto) {
+    public boolean delUser(UtilisateurDTO userdto) {
         userdto.setDeleted(true);
         Utilisateur user=utilisateurRepository.save(modelMapper.map(userdto,Utilisateur.class));
-        return user.getDeleted();
+        return user.isDeleted();
     }
 
 

@@ -9,6 +9,6 @@ public interface I_Outil {
     public OutilDTO addOutil(OutilDTO outilDTO);
     public OutilDTO modOutil(OutilDTO outilDTO);
     public OutilDTO outilById(Long id);
-    public Boolean delOutil(OutilDTO outilDTO);
+    public boolean delOutil(OutilDTO outilDTO);
     public List<OutilDTO> allOutils();
 }

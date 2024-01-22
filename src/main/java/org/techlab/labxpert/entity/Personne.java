@@ -17,7 +17,7 @@ public class Personne {
     private String adresse;
     private String tel;
     @Column(name="is_deleted")
-    private Boolean deleted=false;
+    private boolean deleted;
     public Personne() {
     }
 

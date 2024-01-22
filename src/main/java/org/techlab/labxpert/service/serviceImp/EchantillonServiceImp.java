@@ -22,7 +22,8 @@ public class EchantillonServiceImp implements I_Echantillon {
     EchantillonRepository echantillonRepository;
     @Autowired
     I_Analyse i_analyse;
-    ModelMapper modelMapper=new ModelMapper();
+    @Autowired
+    ModelMapper modelMapper;
     @Override
     public EchantillonDTO addEchantillon(EchantillonDTO echantillondto) {
         Echantillon echantillon=echantillonRepository.save(modelMapper.map(echantillondto,Echantillon.class));
@@ -44,10 +45,10 @@ public class EchantillonServiceImp implements I_Echantillon {
         return modelMapper.map(echantillon,EchantillonDTO.class);
     }
     @Override
-    public Boolean delEchantillhon(EchantillonDTO echantillondto) {
+    public boolean delEchantillhon(EchantillonDTO echantillondto) {
         echantillondto.setDeleted(true);
         Echantillon echantillon=echantillonRepository.save(modelMapper.map(echantillondto,Echantillon.class));
-        return echantillon.getDeleted();
+        return echantillon.isDeleted();
     }
 }
 

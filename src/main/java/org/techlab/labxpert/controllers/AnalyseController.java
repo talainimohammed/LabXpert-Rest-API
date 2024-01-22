@@ -17,6 +17,7 @@ import org.techlab.labxpert.service.I_Echantillon;
 import org.techlab.labxpert.service.I_Rapport;
 import org.techlab.labxpert.service.serviceImp.ResultRepport;
 
+import javax.validation.Valid;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.util.HashMap;
@@ -28,13 +29,6 @@ import java.util.Map;
 public class AnalyseController {
     @Autowired
     I_Analyse i_analyse;
-
-
-
-
-
-
-
     @Autowired
     I_Echantillon i_echantillon;
     @Autowired
@@ -105,7 +99,7 @@ public class AnalyseController {
 
     @PostMapping("/planification")
 
-    public ResponseEntity<PlanificationDTO> affectAnalyse(@RequestBody PlanificationDTO planificationDTO) {
+    public ResponseEntity<PlanificationDTO> affectAnalyse(@RequestBody @Valid PlanificationDTO planificationDTO) {
         planificationDTO = i_analyse.planifierAnalyse(planificationDTO);
         return new ResponseEntity<>(planificationDTO, HttpStatus.OK);
     }

@@ -10,6 +10,6 @@ public interface I_Fournisseur {
     public FournisseurDTO addFournisseur(FournisseurDTO fournisseurDTO);
     public FournisseurDTO getFournisseur(Long id);
     public FournisseurDTO modFournisseur(FournisseurDTO fournisseurDTO);
-    public Boolean delFournisseur(FournisseurDTO fournisseurDTO);
+    public boolean delFournisseur(FournisseurDTO fournisseurDTO);
     public List<FournisseurDTO> showFournisseurs();
 }

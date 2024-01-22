@@ -19,7 +19,8 @@ public class AnalyseServiceImp implements I_Analyse {
     AnalyseRepository analyseRepository;
     @Autowired
     PlanificationRepository planificationRepository;
-    ModelMapper modelMapper=new ModelMapper();
+    @Autowired
+    ModelMapper modelMapper;
 
     @Override
     public AnalyseDTO addAnalyse(AnalyseDTO analyseDTO) {
@@ -34,10 +35,10 @@ public class AnalyseServiceImp implements I_Analyse {
     }
 
     @Override
-    public Boolean delAnalyse(AnalyseDTO analyseDTO) {
+    public boolean delAnalyse(AnalyseDTO analyseDTO) {
         analyseDTO.setDeleted(Boolean.TRUE);
         Analyse analyse=analyseRepository.save(modelMapper.map(analyseDTO,Analyse.class));
-        return analyse.getDeleted();
+        return analyse.isDeleted();
     }
 
     @Override

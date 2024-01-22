@@ -41,9 +41,9 @@ public class PatientServiceImp implements I_Patient{
     }
 
     @Override
-    public Boolean delPatient(PatientDTO patientdto) {
+    public boolean delPatient(PatientDTO patientdto) {
         patientdto.setDeleted(Boolean.TRUE);
         Patient patient=patientRepository.save(modelMapper.map(patientdto,Patient.class));
-        return patient.getDeleted();
+        return patient.isDeleted();
     }
 }

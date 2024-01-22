@@ -11,6 +11,7 @@ import org.techlab.labxpert.exception.CustomErrorException;
 import org.techlab.labxpert.exception.CustomErrorResponse;
 import org.techlab.labxpert.service.I_Patient;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,6 @@ import java.util.Map;
 public class PatientController {
     @Autowired
     I_Patient i_patient;
-
 
     @GetMapping
     public List allPatients(){
@@ -34,13 +34,13 @@ public class PatientController {
         return patient;
     }
     @PostMapping
-    public ResponseEntity<PatientDTO> addPatient(@RequestBody PatientDTO patientDTO){
+    public ResponseEntity<PatientDTO> addPatient(@RequestBody @Valid PatientDTO patientDTO){
         PatientDTO patientDTO1=i_patient.addPatient(patientDTO);
         return new ResponseEntity<>(patientDTO1, HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<PatientDTO> modPatient(@RequestBody PatientDTO patientDTO){
+    public ResponseEntity<PatientDTO> modPatient(@RequestBody @Valid PatientDTO patientDTO){
         PatientDTO patientDTO1=i_patient.modPatient(patientDTO);
         return new ResponseEntity<>(patientDTO1, HttpStatus.CREATED);
     }

@@ -80,11 +80,8 @@ public class EchantillonController {
             OutilDTO outilDTO=modelMapper.map(outilEchantillon.getOutil(),OutilDTO.class);
             outilDTO.setQuantite(outilDTO.getQuantite()-outilEchantillon.getQuantite());
             i_outil.modOutil(outilDTO);
-
-
         });
         }
-
 
         return new ResponseEntity<>(echantillonDTO, HttpStatus.CREATED);
     }

@@ -15,8 +15,8 @@ public class OutilServiceImp implements I_Outil {
 
     @Autowired
     OutilRepository outilRepository;
-
-    ModelMapper modelMapper=new ModelMapper();
+    @Autowired
+    ModelMapper modelMapper;
     @Override
     public OutilDTO addOutil(OutilDTO outilDTO) {
         Outil outil=outilRepository.save(modelMapper.map(outilDTO,Outil.class));
@@ -36,10 +36,10 @@ public class OutilServiceImp implements I_Outil {
     }
 
     @Override
-    public Boolean delOutil(OutilDTO outilDTO) {
+    public boolean delOutil(OutilDTO outilDTO) {
         outilDTO.setDeleted(Boolean.TRUE);
         Outil outil=outilRepository.save(modelMapper.map(outilDTO,Outil.class));
-        return outil.getDeleted();
+        return outil.isDeleted();
     }
 
     @Override

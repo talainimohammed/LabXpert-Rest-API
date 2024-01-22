@@ -29,7 +29,7 @@ public class Analyse {
     @OneToMany(mappedBy = "analyse" , cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Collection<Numeration> numerations;
     @Column(name="is_deleted")
-    private Boolean deleted;
+    private boolean deleted;
 
     public Analyse() {
     }

@@ -31,7 +31,7 @@ public class Echantillon {
     @OneToMany(mappedBy = "echantillon", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Collection<Analyse> analyses;
     @Column(name="is_deleted")
-    private Boolean deleted;
+    private boolean deleted;
 
     public Echantillon() {
     }
