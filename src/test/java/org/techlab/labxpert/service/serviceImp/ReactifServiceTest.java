@@ -30,10 +30,8 @@ class ReactifServiceTest {
     ReactifDTO reactifDTO;
     @Autowired
     FournisseurRepository fournisseurRepository;
-<<<<<<< HEAD
     Fournisseur fournisseur;
-=======
->>>>>>> 72afdc60b9e1df17fe9d12fd56b16f6183d9a8ea
+
     /*@ParameterizedTest
     @CsvFileSource(resources = "/listreactif.csv" , numLinesToSkip = 1)
     void addReactif(String Name,String Description,int Quantite,String DateExperation,Long idfournisseur) throws ParseException {
@@ -48,7 +46,6 @@ class ReactifServiceTest {
         reactif.setFournisseur(fournisseur);
         i_reactif.addReactif(reactif);
     }*/
-<<<<<<< HEAD
     Date date;
     SimpleDateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd");
     @BeforeEach
@@ -81,17 +78,7 @@ class ReactifServiceTest {
     @Test
     void delReactif() {
         ReactifDTO reactifDTO1=i_reactif.addReactif(reactifDTO);
-
-
         assertTrue(i_reactif.delReactif(reactifDTO1));
     }
 
-
-
-
-
-
-
-=======
->>>>>>> 72afdc60b9e1df17fe9d12fd56b16f6183d9a8ea
 }
