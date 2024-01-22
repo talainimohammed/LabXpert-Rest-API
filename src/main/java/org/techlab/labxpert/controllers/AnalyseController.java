@@ -76,7 +76,7 @@ public class AnalyseController {
     }
 
     @PutMapping
-    public ResponseEntity<AnalyseDTO> updateAnalyse(@RequestBody AnalyseDTO analyseDTO) {
+    public ResponseEntity<AnalyseDTO> updateAnalyse(@RequestBody @Valid AnalyseDTO analyseDTO) {
         AnalyseDTO analyseDTO1 = i_analyse.showAnalyseWithId(analyseDTO.getIdAnalyse());
         analyseDTO1.setDateFin(analyseDTO.getDateFin());
         analyseDTO1.setDateDebut(analyseDTO.getDateDebut());
