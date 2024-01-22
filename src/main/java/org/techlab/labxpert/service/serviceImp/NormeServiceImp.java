@@ -39,7 +39,7 @@ public class NormeServiceImp implements I_Norme {
     public boolean delNorme(NormeDTO normeDTO) {
         normeDTO.setDeleted(Boolean.TRUE);
         Norme norme=normeRepository.save(modelMapper.map(normeDTO,Norme.class));
-        return modelMapper.map(norme, NormeDTO.class).getDeleted();
+        return modelMapper.map(norme, NormeDTO.class).isDeleted();
     }
 
     @Override

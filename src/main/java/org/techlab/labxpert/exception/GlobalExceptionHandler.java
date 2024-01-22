@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<CustomErrorResponse> handleValidationException(MethodArgumentNotValidException exception){
         CustomErrorResponse exc = new CustomErrorResponse();
         exc.setStatus(HttpStatus.BAD_REQUEST.value());
-        exc.setMessage("hello");
+        exc.setMessage(exception.getFieldError().getField()+" "+exception.getFieldError().getDefaultMessage());
         exc.setTimeStamp(System.currentTimeMillis());
         //System.out.println(exception);
         return new ResponseEntity<>(exc,HttpStatus.BAD_REQUEST);

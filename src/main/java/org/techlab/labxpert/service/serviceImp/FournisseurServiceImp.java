@@ -36,7 +36,7 @@ public class FournisseurServiceImp implements I_Fournisseur {
     public boolean delFournisseur(FournisseurDTO fournisseurDTO) {
         fournisseurDTO.setDeleted(Boolean.TRUE);
         FournisseurDTO fournisseurDTO1=modelMapper.map(fournisseurRepository.save(modelMapper.map(fournisseurDTO, Fournisseur.class)),FournisseurDTO.class);
-        return fournisseurDTO1.getDeleted();
+        return fournisseurDTO1.isDeleted();
     }
 
     @Override
