@@ -2,6 +2,7 @@ package org.techlab.labxpert.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import lombok.ToString;
 import org.techlab.labxpert.Enum.StatutNumeration;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ public class Numeration {
     private StatutNumeration statut;
     @ManyToOne
     private Norme norme;
+    @ToString.Exclude
     @JsonBackReference
     @ManyToOne
     private Analyse analyse;

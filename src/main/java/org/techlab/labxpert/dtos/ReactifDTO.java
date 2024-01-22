@@ -13,14 +13,12 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 public class ReactifDTO {
-
     private Long idReactif;
     private String nom;
     private String description;
     private int quantite;
     private Date dateExpiration;
     private Fournisseur fournisseur;
-
     private Boolean deleted=false;
 
     public ReactifDTO(String nom, String description, int quantite, Date dateExpiration, Fournisseur fournisseur) {
@@ -30,4 +28,6 @@ public class ReactifDTO {
         this.dateExpiration = dateExpiration;
         this.fournisseur = fournisseur;
     }
+
+
 }

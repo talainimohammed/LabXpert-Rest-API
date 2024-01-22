@@ -19,14 +19,14 @@ public class ReactifController {
     @Autowired
     I_Reactif i_reactif;
     @GetMapping
-    public List allReactif(){
+    public ResponseEntity<List<ReactifDTO>> allReactif(){
         List<ReactifDTO> listreactif=i_reactif.showReactif();
-        return listreactif;
+        return new ResponseEntity<>(listreactif,HttpStatus.OK);
     }
     @GetMapping("{id}")
-    public ReactifDTO showReactif(@PathVariable(value = "id") Long id_reactif){
+    public ResponseEntity<ReactifDTO> showReactif(@PathVariable(value = "id") Long id_reactif){
         ReactifDTO reactif=i_reactif.showReactifwithid(( id_reactif));
-        return reactif ;
+        return new ResponseEntity<>(reactif,HttpStatus.OK);
     }
     @PostMapping
     public ResponseEntity<ReactifDTO> addReactif(@RequestBody ReactifDTO reactifDTO){
@@ -36,17 +36,17 @@ public class ReactifController {
     @PutMapping
     public ResponseEntity<ReactifDTO> modRactif(@RequestBody ReactifDTO reactifDTO){
         ReactifDTO reactifDTO1  =i_reactif.modReactif(reactifDTO);
-        return new ResponseEntity<>(reactifDTO1, HttpStatus.CREATED);
+        return new ResponseEntity<>(reactifDTO1, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public Map<String,Boolean> delReactif(@PathVariable(value = "id") Long id_reactif ){
+    public ResponseEntity<Map<String,Boolean>> delReactif(@PathVariable(value = "id") Long id_reactif ){
         ReactifDTO reactifDTO=i_reactif.showReactifwithid(id_reactif);
-      //  reactifDTO.setDeleted(true);
+        //reactifDTO.setDeleted(true);
         Map<String,Boolean> response=new HashMap<>();
         if(i_reactif.delReactif(reactifDTO)){
             response.put("deleted",Boolean.TRUE);
         }
-        return response;
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
 }

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import org.techlab.labxpert.dtos.PatientDTO;
 import org.techlab.labxpert.dtos.UtilisateurDTO;
 import org.techlab.labxpert.entity.Patient;
+import org.techlab.labxpert.exception.CustomErrorException;
+import org.techlab.labxpert.exception.CustomErrorResponse;
 import org.techlab.labxpert.service.I_Patient;
 
 import java.util.HashMap;
@@ -19,6 +21,7 @@ import java.util.Map;
 public class PatientController {
     @Autowired
     I_Patient i_patient;
+
 
     @GetMapping
     public List allPatients(){

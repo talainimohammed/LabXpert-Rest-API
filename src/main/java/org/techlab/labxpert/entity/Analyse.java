@@ -16,6 +16,7 @@ public class Analyse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAnalyse;
+    @ToString.Exclude
     @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
     private Echantillon echantillon;
@@ -23,8 +24,9 @@ public class Analyse {
     private Date dateDebut;
     private Date dateFin;
     private String commantaire;
+    @ToString.Exclude
     @JsonManagedReference
-    @OneToMany(mappedBy = "analyse" , cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "analyse" , cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Collection<Numeration> numerations;
     @Column(name="is_deleted")
     private Boolean deleted;

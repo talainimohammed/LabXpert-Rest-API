@@ -98,7 +98,8 @@ class NumerationServiceTest {
         numerationDTO.setNorme(modelMapper.map(norme,Norme.class));
         if(numerationDTO.getValue()>norme.getMinValue() && numerationDTO.getValue()<norme.getMaxValue()){
             numerationDTO.setStatut(StatutNumeration.Normal);
-        }else {numerationDTO.setStatut(StatutNumeration.Anormal);}
+        }else {numerationDTO.setStatut(StatutNumeration.Anormal);
+        }
 
 
     }

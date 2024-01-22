@@ -21,15 +21,15 @@ public class NumerationController {
     I_Analyse i_analyse;
 
     @GetMapping
-    public List<NumerationDTO> showNumerations(){
+    public ResponseEntity<List<NumerationDTO>> showNumerations(){
         List<NumerationDTO> numerationDTO=i_numeration.allNumeration();
-        return  numerationDTO;
+        return new ResponseEntity<>(numerationDTO,HttpStatus.OK);
     }
     @GetMapping("/analyse/{id}")
-    public List<NumerationDTO> showNumerationsWithAnalyse(@PathVariable(value = "id") Long id){
+    public ResponseEntity<List<NumerationDTO>> showNumerationsWithAnalyse(@PathVariable(value = "id") Long id){
         AnalyseDTO analyseDTO=i_analyse.showAnalyseWithId(id);
         List<NumerationDTO> numerationDTO=i_numeration.allNumerationWithAnalyse(analyseDTO);
-        return  numerationDTO;
+        return  new ResponseEntity<>(numerationDTO,HttpStatus.OK);
     }
     @PostMapping
     public ResponseEntity<NumerationDTO> addNumeration(@RequestBody NumerationDTO numerationDTO){
@@ -40,18 +40,18 @@ public class NumerationController {
     @PutMapping
     public ResponseEntity<NumerationDTO> modNumeration(@RequestBody NumerationDTO numerationDTO){
         NumerationDTO numerationDTO1=i_numeration.modNumeration(numerationDTO);
-        return new ResponseEntity<>(numerationDTO1, HttpStatus.CREATED);
+        return new ResponseEntity<>(numerationDTO1, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public HashMap<String,Boolean> deleteNumeration(@PathVariable(value = "id") Long id){
+    public ResponseEntity<HashMap<String,Boolean>> deleteNumeration(@PathVariable(value = "id") Long id){
         NumerationDTO numerationDTO=i_numeration.NumerationWithId(id);
         //numerationDTO.setDeleted(Boolean.TRUE);
         HashMap<String,Boolean> response=new HashMap<>();
         if(i_numeration.delNumeration(numerationDTO)){
             response.put("deleted",Boolean.TRUE);
         }
-        return response;
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
 }
