@@ -9,7 +9,7 @@ import java.util.List;
 public interface I_Utilisateur {
     public UtilisateurDTO addUser(UtilisateurDTO userdto);
     public UtilisateurDTO modUser(UtilisateurDTO userdto);
-    public Boolean delUser(UtilisateurDTO userdto);
+    public boolean delUser(UtilisateurDTO userdto);
     public List<UtilisateurDTO> showUsers();
     public UtilisateurDTO showUserwithid(Long id);
 

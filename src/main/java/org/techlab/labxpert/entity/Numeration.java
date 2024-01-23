@@ -22,7 +22,7 @@ public class Numeration {
     @ManyToOne
     private Analyse analyse;
     @Column(name="`is_deleted`")
-    private Boolean deleted;
+    private boolean deleted;
 
 
 }

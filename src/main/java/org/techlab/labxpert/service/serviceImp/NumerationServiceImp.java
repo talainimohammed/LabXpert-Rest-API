@@ -19,8 +19,8 @@ public class NumerationServiceImp implements I_Numeration {
 
     @Autowired
     NumerationRepository numerationRepository;
-
-    ModelMapper modelMapper=new ModelMapper();
+    @Autowired
+    ModelMapper modelMapper;
     @Override
     public NumerationDTO addNumeration(NumerationDTO numerationDTO) {
         Numeration numeration=numerationRepository.save(modelMapper.map(numerationDTO,Numeration.class));
@@ -40,10 +40,10 @@ public class NumerationServiceImp implements I_Numeration {
     }
 
     @Override
-    public Boolean delNumeration(NumerationDTO numerationDTO) {
+    public boolean delNumeration(NumerationDTO numerationDTO) {
         numerationDTO.setDeleted(Boolean.TRUE);
         Numeration numeration=numerationRepository.save(modelMapper.map(numerationDTO,Numeration.class));
-        return numeration.getDeleted();
+        return numeration.isDeleted();
     }
 
     @Override

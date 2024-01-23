@@ -17,7 +17,7 @@ public class Fournisseur {
     private String adresse;
     private String tel;
     @Column(name="is_deleted")
-    private Boolean deleted;
+    private boolean deleted;
 
     public Fournisseur() {
     }

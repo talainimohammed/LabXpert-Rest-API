@@ -11,7 +11,7 @@ import java.util.List;
 public interface I_Analyse {
     public AnalyseDTO addAnalyse(AnalyseDTO analyseDTO);
     public AnalyseDTO modAnalyse(AnalyseDTO analyseDTO);
-    public Boolean delAnalyse(AnalyseDTO analyseDTO);
+    public boolean delAnalyse(AnalyseDTO analyseDTO);
     public List<AnalyseDTO> showAnalyses();
     public AnalyseDTO showAnalyseWithId(Long id);
     public PlanificationDTO planifierAnalyse(PlanificationDTO planificationDTO);

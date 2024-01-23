@@ -9,6 +9,7 @@ import org.techlab.labxpert.entity.Utilisateur;
 import org.techlab.labxpert.service.I_Utilisateur;
 import org.techlab.labxpert.service.serviceImp.UtilisateurServiceImp;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,12 +31,12 @@ public class UtilisateurController {
         return user;
     }
     @PostMapping
-    public ResponseEntity<UtilisateurDTO> addUser(@RequestBody UtilisateurDTO utilisateurDTO){
+    public ResponseEntity<UtilisateurDTO> addUser(@RequestBody @Valid UtilisateurDTO utilisateurDTO){
         UtilisateurDTO utilisateurDTO1=i_utilisateur.addUser(utilisateurDTO);
         return new ResponseEntity<>(utilisateurDTO1, HttpStatus.CREATED);
     }
     @PutMapping
-    public ResponseEntity<UtilisateurDTO> modUser(@RequestBody UtilisateurDTO utilisateurDTO){
+    public ResponseEntity<UtilisateurDTO> modUser(@RequestBody @Valid UtilisateurDTO utilisateurDTO){
         UtilisateurDTO utilisateurDTO1=i_utilisateur.modUser(utilisateurDTO);
         return new ResponseEntity<>(utilisateurDTO1, HttpStatus.CREATED);
     }

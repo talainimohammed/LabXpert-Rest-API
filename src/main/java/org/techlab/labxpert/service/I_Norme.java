@@ -11,6 +11,6 @@ public interface I_Norme {
     public NormeDTO getNormeById(Long id);
 
     public NormeDTO modNorme(NormeDTO normeDTO);
-    public Boolean delNorme(NormeDTO normeDTO);
+    public boolean delNorme(NormeDTO normeDTO);
     public List<NormeDTO> showNormes();
 }

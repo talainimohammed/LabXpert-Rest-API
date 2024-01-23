@@ -29,13 +29,6 @@ import java.util.Map;
 public class AnalyseController {
     @Autowired
     I_Analyse i_analyse;
-
-
-
-
-
-
-
     @Autowired
     I_Echantillon i_echantillon;
     @Autowired

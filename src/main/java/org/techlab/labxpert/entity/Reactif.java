@@ -18,7 +18,7 @@ public class Reactif {
     @ManyToOne
     private Fournisseur fournisseur;
     @Column(name="is_deleted")
-    private Boolean deleted;
+    private boolean deleted;
 
     public Reactif() {
     }

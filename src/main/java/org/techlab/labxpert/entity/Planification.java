@@ -19,7 +19,7 @@ public class Planification {
     private Date dateDebut;
     private Date dateFin;
     @Column(name="is_deleted")
-    private Boolean deleted;
+    private boolean deleted;
 
     public Planification() {
     }

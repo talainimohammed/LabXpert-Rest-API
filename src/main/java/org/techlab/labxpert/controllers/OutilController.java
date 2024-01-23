@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.techlab.labxpert.dtos.OutilDTO;
 import org.techlab.labxpert.service.I_Outil;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,12 +23,12 @@ public class OutilController {
         return new ResponseEntity<>(outilDTOS, HttpStatus.OK);
     }
     @PostMapping
-    public ResponseEntity<OutilDTO> addOutil(@RequestBody OutilDTO outilDTO){
+    public ResponseEntity<OutilDTO> addOutil(@RequestBody @Valid OutilDTO outilDTO){
         OutilDTO outiladded=i_outil.addOutil(outilDTO);
         return new ResponseEntity<>(outiladded, HttpStatus.CREATED);
     }
     @PutMapping
-    public ResponseEntity<OutilDTO> modOutil(@RequestBody OutilDTO outilDTO){
+    public ResponseEntity<OutilDTO> modOutil(@RequestBody @Valid OutilDTO outilDTO){
         OutilDTO outilupdated=i_outil.modOutil(outilDTO);
         return new ResponseEntity<>(outilupdated, HttpStatus.OK);
     }
