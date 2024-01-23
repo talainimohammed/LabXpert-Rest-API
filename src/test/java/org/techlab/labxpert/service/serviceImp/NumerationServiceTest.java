@@ -91,13 +91,13 @@ class NumerationServiceTest {
         normeDTO.setUnite("mg/dL");
         normeDTO.setMinValue(8.5);
         normeDTO.setMaxValue(10.5);
-        //NormeDTO norme=i_norme.addNorme(normeDTO);
+        NormeDTO norme=i_norme.addNorme(normeDTO);
         /*************************************************************/
         numerationDTO=new NumerationDTO();
         numerationDTO.setAnalyse(modelMapper.map(analyseDTO1, Analyse.class));
         numerationDTO.setValue(3.1);
-        numerationDTO.setNorme(modelMapper.map(i_norme.getNormeById(13L),Norme.class));
-        if(numerationDTO.getValue()>=i_norme.getNormeById(13L).getMinValue() && numerationDTO.getValue()<=i_norme.getNormeById(13L).getMaxValue()){
+        numerationDTO.setNorme(modelMapper.map(norme,Norme.class));
+        if(numerationDTO.getValue()>=norme.getMinValue() && numerationDTO.getValue()<=norme.getMaxValue()){
             numerationDTO.setStatut(StatutNumeration.Normal);
         }else {numerationDTO.setStatut(StatutNumeration.Anormal);
         }
