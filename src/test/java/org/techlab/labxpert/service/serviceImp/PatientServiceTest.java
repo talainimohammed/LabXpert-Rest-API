@@ -2,6 +2,7 @@ package org.techlab.labxpert.service.serviceImp;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,8 @@ class PatientServiceTest {
     I_Patient i_patient;
 
     PatientDTO patientDTO;
-
-    ModelMapper modelMapper=new ModelMapper();
+    @Autowired
+    ModelMapper modelMapper;
     Date date;
     SimpleDateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd");
     @BeforeEach
@@ -43,6 +44,7 @@ class PatientServiceTest {
     }
 
     @Test
+    @Tag("test1")
     void addPatient() {
         PatientDTO patientDTO1=i_patient.addPatient(patientDTO);
         assertNotNull(patientDTO1,"Patient not inserted");
@@ -50,6 +52,7 @@ class PatientServiceTest {
     }
 
     @Test
+    @Tag("test1")
     void showPatient() {
         PatientDTO patientDTO1=i_patient.addPatient(patientDTO);
         List<PatientDTO> patients=i_patient.showPatient();

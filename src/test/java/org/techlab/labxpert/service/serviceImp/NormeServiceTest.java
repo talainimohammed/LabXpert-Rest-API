@@ -44,8 +44,7 @@ class NormeServiceTest {
     @AfterEach
     void tearDown() {
     }
-
-  /*  @ParameterizedTest
+   /* @ParameterizedTest
     @CsvFileSource(resources = "/listTest.csv", numLinesToSkip = 1)
     void addNorme(String Name,double Min,double Max,String Unit) {
         Norme norme=new Norme();
@@ -54,8 +53,8 @@ class NormeServiceTest {
         norme.setMaxValue(Max);
         norme.setMinValue(Min);
         normeRepository.save(norme);
-    }
-*/
+    }*/
+
     @Test
     void showNormes() {
         System.out.println(normeRepository.findAll());

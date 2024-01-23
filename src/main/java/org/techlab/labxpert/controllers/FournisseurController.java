@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/fournisseur")
+@RequestMapping(value="/api/v1/fournisseur", produces = "application/json")
 public class FournisseurController {
 
     @Autowired
@@ -20,28 +20,32 @@ public class FournisseurController {
 
     @GetMapping
     public ResponseEntity<List<FournisseurDTO>> showFournisseurs(){
+        // API pour Afficher Liste Fournisseur
         List<FournisseurDTO> fournisseurDTOS=i_fournisseur.showFournisseurs();
         return new ResponseEntity<>(fournisseurDTOS, HttpStatus.OK);
     }
     @GetMapping("/{id}")
     public ResponseEntity<FournisseurDTO> getFournisseur(@PathVariable(value = "id") Long id_fournisseur){
+        // API pour Afficher fournisseur par  id
         FournisseurDTO fournisseurDTO=i_fournisseur.getFournisseur(id_fournisseur);
         return new ResponseEntity<>(fournisseurDTO, HttpStatus.OK);
     }
     @PostMapping
     public ResponseEntity<FournisseurDTO> addFournisseur(@RequestBody @Valid FournisseurDTO fournisseurDTO){
+        // API pour Ajouter Fournisseur
         FournisseurDTO fournisseur=i_fournisseur.addFournisseur(fournisseurDTO);
         return new ResponseEntity<>(fournisseur, HttpStatus.CREATED);
     }
     @PutMapping
     public ResponseEntity<FournisseurDTO> modFournisseur(@RequestBody @Valid FournisseurDTO fournisseurDTO){
+        // API pour modifier Fournisseur
         FournisseurDTO fournisseur=i_fournisseur.modFournisseur(fournisseurDTO);
         return new ResponseEntity<>(fournisseur, HttpStatus.OK);
     }
     @DeleteMapping("{id}")
     public HashMap<String,Boolean> delFournisseur(@PathVariable(value = "id") Long id_fournisseur){
+        // API pour Supprimer Fournisseur
         FournisseurDTO fournisseurDTO=i_fournisseur.getFournisseur(id_fournisseur);
-        //fournisseurDTO.setDeleted(Boolean.TRUE);
         HashMap<String,Boolean> response=new HashMap<>();
         if(i_fournisseur.delFournisseur(fournisseurDTO)){
             response.put("delete",Boolean.TRUE);

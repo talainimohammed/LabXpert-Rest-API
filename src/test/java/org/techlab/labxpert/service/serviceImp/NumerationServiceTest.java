@@ -39,32 +39,33 @@ class NumerationServiceTest {
     AnalyseDTO analyseDTO;
     NumerationDTO numerationDTO;
     NormeDTO normeDTO;
-    ModelMapper modelMapper=new ModelMapper();
+    @Autowired
+    ModelMapper modelMapper;
     Date date;
     SimpleDateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd");
     @BeforeEach
     void setUp() throws ParseException {
 
         patientDTO=new PatientDTO();
-        patientDTO.setNom("mohammed");
-        patientDTO.setPrenom("prenom mohammed");
-        patientDTO.setAdresse("qwerty");
-        patientDTO.setTel("02125232525");
+        patientDTO.setNom("TALAINI");
+        patientDTO.setPrenom("Mohammed");
+        patientDTO.setAdresse("Casablanca Bernoussi Bloc 61");
+        patientDTO.setTel("0617066494");
         patientDTO.setSexe("Male");
-        date = inputFormat.parse("2000-02-02");
+        date = inputFormat.parse("1995-02-28");
         patientDTO.setDateNaissance(date);
         PatientDTO patientDTO1=i_patient.addPatient(patientDTO);
         /***************************************************************/
         utilisateurDTO=new UtilisateurDTO();
         utilisateurDTO.setNom("imad");
-        utilisateurDTO.setPrenom("prenom imad");
-        utilisateurDTO.setAdresse("azerty");
+        utilisateurDTO.setPrenom("mohssine");
+        utilisateurDTO.setAdresse("Casablanca");
         utilisateurDTO.setTel("147852369");
         utilisateurDTO.setSexe("Male");
         date = inputFormat.parse("2000-02-02");
         utilisateurDTO.setDateNaissance(date);
         utilisateurDTO.setPassword("123456");
-        utilisateurDTO.setNomUtilisateur("qwerty");
+        utilisateurDTO.setNomUtilisateur("imad");
         utilisateurDTO.setRole(RoleUser.Preleveur);
         UtilisateurDTO utilisateurDTO1=i_utilisateur.addUser(utilisateurDTO);
         /*************************************************************/
@@ -74,15 +75,15 @@ class NumerationServiceTest {
         echantillonDTO.setUtilisateur(modelMapper.map(utilisateurDTO1, Utilisateur.class));
         date = inputFormat.parse("2024-01-18");
         echantillonDTO.setDatePrelevement(date);
-        echantillonDTO.setTypeAnalyse("Biochimie");
+        echantillonDTO.setTypeAnalyse("Biochimie Sanguine");
         EchantillonDTO echantillonDTO1=i_echantillon.addEchantillon(echantillonDTO);
         /****************************************************/
         analyseDTO=new AnalyseDTO();
         analyseDTO.setNomAnalyse(echantillonDTO1.getTypeAnalyse());
         analyseDTO.setEchantillon(modelMapper.map(echantillonDTO1, Echantillon.class));
         analyseDTO.setCommantaire("analyse a faire urgent");
-        analyseDTO.setDateDebut(inputFormat.parse("2024-01-19"));
-        analyseDTO.setDateFin(inputFormat.parse("2024-01-19"));
+        analyseDTO.setDateDebut(inputFormat.parse("2024-01-22"));
+        analyseDTO.setDateFin(inputFormat.parse("2024-01-22"));
         AnalyseDTO analyseDTO1=i_analyse.addAnalyse(analyseDTO);
         /************************************************************/
         normeDTO=new NormeDTO();
@@ -90,13 +91,13 @@ class NumerationServiceTest {
         normeDTO.setUnite("mg/dL");
         normeDTO.setMinValue(8.5);
         normeDTO.setMaxValue(10.5);
-        NormeDTO norme=i_norme.addNorme(normeDTO);
+        //NormeDTO norme=i_norme.addNorme(normeDTO);
         /*************************************************************/
         numerationDTO=new NumerationDTO();
         numerationDTO.setAnalyse(modelMapper.map(analyseDTO1, Analyse.class));
-        numerationDTO.setValue(9);
-        numerationDTO.setNorme(modelMapper.map(norme,Norme.class));
-        if(numerationDTO.getValue()>norme.getMinValue() && numerationDTO.getValue()<norme.getMaxValue()){
+        numerationDTO.setValue(3.1);
+        numerationDTO.setNorme(modelMapper.map(i_norme.getNormeById(13L),Norme.class));
+        if(numerationDTO.getValue()>=i_norme.getNormeById(13L).getMinValue() && numerationDTO.getValue()<=i_norme.getNormeById(13L).getMaxValue()){
             numerationDTO.setStatut(StatutNumeration.Normal);
         }else {numerationDTO.setStatut(StatutNumeration.Anormal);
         }

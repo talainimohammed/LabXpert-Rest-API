@@ -13,10 +13,8 @@ import org.techlab.labxpert.dtos.OutilDTO;
 import org.techlab.labxpert.dtos.UtilisateurDTO;
 import org.techlab.labxpert.entity.Echantillon;
 import org.techlab.labxpert.entity.Outil;
-import org.techlab.labxpert.service.I_Analyse;
-import org.techlab.labxpert.service.I_Echantillon;
-import org.techlab.labxpert.service.I_Outil;
-import org.techlab.labxpert.service.I_Outil_Echantillon;
+import org.techlab.labxpert.entity.Utilisateur;
+import org.techlab.labxpert.service.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -24,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/echantillon")
+@RequestMapping(value="/api/v1/echantillon", produces = "application/json")
 public class EchantillonController {
 
     @Autowired
@@ -32,28 +30,35 @@ public class EchantillonController {
     @Autowired
     I_Analyse i_analyse;
     @Autowired
+    I_Utilisateur i_utilisateur;
+    @Autowired
     I_Outil_Echantillon i_outil_echantillon;
     @Autowired
     I_Outil i_outil;
-    ModelMapper modelMapper=new ModelMapper();
+    @Autowired
+    ModelMapper modelMapper;
 
     @GetMapping
     public List<EchantillonDTO> showEchantillons() {
+        // API pour Afficher liste Echantillon
         return i_echantillon.showEhantillon();
     }
     @GetMapping("/{id}")
     public ResponseEntity<EchantillonDTO> showEchantillonWithId(@PathVariable(value = "id") Long id) {
+        // API pour Afficher Echantillon par id
         EchantillonDTO echantillonDTO = i_echantillon.showEchantillonwithid(id);
         return ResponseEntity.ok().body(echantillonDTO);
     }
     @PutMapping
     public ResponseEntity<EchantillonDTO> modEchantillon(@RequestBody @Valid EchantillonDTO echantillonDTO) {
+        // API pour afficher Echantillon par Id
         EchantillonDTO modifiedEchantillon = i_echantillon.modEchantillon(echantillonDTO);
         return new ResponseEntity<>(modifiedEchantillon, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
     public Map<String,Boolean> delUser(@PathVariable(value = "id") Long id ){
+        // API pour Supprimer Utilisateur
         EchantillonDTO echantillonDTO= i_echantillon.showEchantillonwithid( id);
         //echantillonDTO.setDeleted(true);
         Map<String,Boolean> response=new HashMap<>();
@@ -64,11 +69,10 @@ public class EchantillonController {
     }
     @PostMapping
     ResponseEntity<EchantillonDTO> addEchantillon( @RequestBody @Valid EchantillonDTO echantillondto){
+        // API pour Ajouter un Echantillon
+        Utilisateur utilisateur=modelMapper.map(i_utilisateur.showUserwithid(echantillondto.getUtilisateur().getId()),Utilisateur.class);
+        echantillondto.setUtilisateur(utilisateur);
         EchantillonDTO echantillonDTO=i_echantillon.addEchantillon(echantillondto);
-        /*String uri="http://localhost:8080/api/v1/analyse/echantillon/"+echantillonDTO.getIdEchantillon();
-        RestTemplate restTemplate=new RestTemplate();
-        AnalyseDTO analyseDTO=restTemplate.getForObject(uri,AnalyseDTO.class);
-        System.out.println(analyseDTO);*/
         AnalyseDTO analyseDTO=new AnalyseDTO();
         analyseDTO.setEchantillon(modelMapper.map(echantillonDTO, Echantillon.class));
         analyseDTO.setNomAnalyse(echantillonDTO.getTypeAnalyse());
@@ -79,8 +83,10 @@ public class EchantillonController {
             outilEchantillon.setEchantillon(modelMapper.map(echantillonDTO, Echantillon.class));
             i_outil_echantillon.add(outilEchantillon);
             OutilDTO outilDTO=modelMapper.map(outilEchantillon.getOutil(),OutilDTO.class);
+            if(outilEchantillon.getQuantite()<=outilDTO.getQuantite()){
             outilDTO.setQuantite(outilDTO.getQuantite()-outilEchantillon.getQuantite());
             i_outil.modOutil(outilDTO);
+            }
         });
         }
 

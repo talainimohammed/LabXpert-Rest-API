@@ -41,8 +41,8 @@ class ReactifControllerTest {
 
     ReactifDTO reactifDTO;
     FournisseurDTO fournisseurDTO;
-    ModelMapper modelMapper=new ModelMapper();
-
+    @Autowired
+    ModelMapper modelMapper;
     SimpleDateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd");
     @BeforeEach
     void setUp() throws ParseException {

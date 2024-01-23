@@ -48,7 +48,8 @@ class NumerationControllerTest {
     EchantillonDTO echantillonDTO;
     AnalyseDTO analyseDTO;
     NormeDTO normeDTO;
-    ModelMapper modelMapper=new ModelMapper();
+    @Autowired
+    ModelMapper modelMapper;
     Date date;
     SimpleDateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd");
     @BeforeEach

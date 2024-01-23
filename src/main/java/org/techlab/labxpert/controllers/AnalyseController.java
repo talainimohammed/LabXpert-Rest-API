@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import org.techlab.labxpert.dtos.AnalyseDTO;
 import org.techlab.labxpert.dtos.EchantillonDTO;
 import org.techlab.labxpert.dtos.PlanificationDTO;
+import org.techlab.labxpert.dtos.ReactifDTO;
+import org.techlab.labxpert.entity.Analyse;
 import org.techlab.labxpert.entity.Echantillon;
-import org.techlab.labxpert.service.I_Analyse;
-import org.techlab.labxpert.service.I_Echantillon;
-import org.techlab.labxpert.service.I_Rapport;
+import org.techlab.labxpert.entity.Reactif;
+import org.techlab.labxpert.service.*;
 import org.techlab.labxpert.service.serviceImp.ResultRepport;
 
 import javax.validation.Valid;
@@ -25,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/analyse")
+@RequestMapping(value ="/api/v1/analyse", produces = "application/json")
 public class AnalyseController {
     @Autowired
     I_Analyse i_analyse;
@@ -33,23 +34,30 @@ public class AnalyseController {
     I_Echantillon i_echantillon;
     @Autowired
     I_Rapport i_rapport;
-
-    ModelMapper modelMapper = new ModelMapper();
+    @Autowired
+    I_Reactif i_reactif;
+    @Autowired
+    I_ReactifAnalyse i_ReactifAnalyse;
+    @Autowired
+    ModelMapper modelMapper;
 
     @GetMapping
     public ResponseEntity<List<AnalyseDTO>> getanalyses() {
+        // API pour Afficher tous les analyses
         List<AnalyseDTO> analyses = i_analyse.showAnalyses();
         return new ResponseEntity<>(analyses, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<AnalyseDTO> getanalyse(@PathVariable(value = "id") Long id) {
+        // API pour affiche analyse par id analyse
         AnalyseDTO analyse = i_analyse.showAnalyseWithId(id);
         return new ResponseEntity<>(analyse, HttpStatus.OK);
     }
 
     @GetMapping("/echantillon/{id}")
     public ResponseEntity<AnalyseDTO> addAnalyse(@PathVariable(value = "id") Long id_echantillong) {
+        // API pour ajouter analyse
         EchantillonDTO echantillonDTO = i_echantillon.showEchantillonwithid(id_echantillong);
         AnalyseDTO analyseDTO = new AnalyseDTO();
         analyseDTO.setEchantillon(modelMapper.map(echantillonDTO, Echantillon.class));
@@ -59,12 +67,10 @@ public class AnalyseController {
     }
 
     @GetMapping("/pdf/{id}")
-
     public ResponseEntity<Resource> getpdf(@PathVariable(value = "id") Long id_Analyse) throws JRException, FileNotFoundException, ParseException {
+        // API pour imprimer resultat d'analyse
         byte[] reportContent = i_rapport.exportReport(id_Analyse);
-
         ByteArrayResource resource = new ByteArrayResource(reportContent);
-
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .contentLength(resource.contentLength())
@@ -77,19 +83,30 @@ public class AnalyseController {
 
     @PutMapping
     public ResponseEntity<AnalyseDTO> updateAnalyse(@RequestBody @Valid AnalyseDTO analyseDTO) {
+        // API pour Modifier analyse
         AnalyseDTO analyseDTO1 = i_analyse.showAnalyseWithId(analyseDTO.getIdAnalyse());
         analyseDTO1.setDateFin(analyseDTO.getDateFin());
         analyseDTO1.setDateDebut(analyseDTO.getDateDebut());
         analyseDTO1.setCommantaire(analyseDTO.getCommantaire());
         analyseDTO1 = i_analyse.modAnalyse(analyseDTO1);
-        System.out.println(analyseDTO1);
+        AnalyseDTO finalAnalyseDTO = analyseDTO1;
+        if(analyseDTO.getReactifAnalyseList()!=null){
+        analyseDTO.getReactifAnalyseList().forEach(reactifAnalyse -> {
+            Reactif reactif=modelMapper.map(i_reactif.showReactifwithid(reactifAnalyse.getReactif().getIdReactif()),Reactif.class);
+            reactifAnalyse.setAnalyse(modelMapper.map(finalAnalyseDTO, Analyse.class));
+            reactifAnalyse.setReactif(reactif);
+            i_ReactifAnalyse.add(reactifAnalyse);
+            reactif.setQuantite(reactif.getQuantite()-reactifAnalyse.getQuantite());
+            i_reactif.modReactif(modelMapper.map(reactif, ReactifDTO.class));
+        });
+        }
         return new ResponseEntity<>(analyseDTO1, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteAnalyse(@PathVariable(value = "id") Long id_analyse) {
+        // API pour supprimer analyse
         AnalyseDTO analyseDTO = i_analyse.showAnalyseWithId(id_analyse);
-        //analyseDTO.setDeleted(Boolean.TRUE);
         Map<String, Boolean> response = new HashMap<>();
         if (i_analyse.delAnalyse(analyseDTO)) {
             response.put("deleted", Boolean.TRUE);
@@ -98,8 +115,8 @@ public class AnalyseController {
     }
 
     @PostMapping("/planification")
-
     public ResponseEntity<PlanificationDTO> affectAnalyse(@RequestBody @Valid PlanificationDTO planificationDTO) {
+        // API pour affecter une analyse
         planificationDTO = i_analyse.planifierAnalyse(planificationDTO);
         return new ResponseEntity<>(planificationDTO, HttpStatus.OK);
     }

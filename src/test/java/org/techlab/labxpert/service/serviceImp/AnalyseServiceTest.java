@@ -43,7 +43,8 @@ class AnalyseServiceTest {
     UtilisateurDTO utilisateurDTO;
     EchantillonDTO echantillonDTO;
     AnalyseDTO analyseDTO;
-    ModelMapper modelMapper=new ModelMapper();
+    @Autowired
+    ModelMapper modelMapper;
     Date date;
     SimpleDateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd");
     @BeforeEach

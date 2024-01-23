@@ -60,7 +60,8 @@ class AnalyseControllerTest {
     EchantillonDTO echantillonDTO;
     AnalyseDTO analyseDTO;
 
-    ModelMapper modelMapper=new ModelMapper();
+    @Autowired
+    ModelMapper modelMapper;
     Date date;
     SimpleDateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd");
 
@@ -116,21 +117,21 @@ class AnalyseControllerTest {
 
     @Test
     void getanalyses() throws Exception {
+        // Test Pour Verifier La liste des analyses
         List<AnalyseDTO>  analyselist= Arrays.asList(analyseDTO);
         when(i_analyse.showAnalyses()).thenReturn(analyselist);
-
         MvcResult mvcResult= mockMvc.perform(get("/api/v1/analyse")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andReturn();
         String response=mvcResult.getResponse().getContentAsString();
-        //System.out.println(response);
         assertNotNull(response);
     }
 
     @Test
     void getanalyse() throws Exception {
+        // Test Analyse with Id
         when(i_analyse.showAnalyseWithId(1L)).thenReturn(analyseDTO);
         MvcResult mvcResult= mockMvc.perform(get("/api/v1/analyse/{id}",1)
                         .contentType(MediaType.APPLICATION_JSON))
@@ -138,13 +139,13 @@ class AnalyseControllerTest {
                 .andDo(print())
                 .andReturn();
         String response=mvcResult.getResponse().getContentAsString();
-        //System.out.println(response);
         assertNotNull(response);
     }
 
 
     @Test
     void updateAnalyse() throws Exception {
+        // Test Modification Analyse
         when(i_analyse.showAnalyseWithId(1L)).thenReturn(analyseDTO);
         analyseDTO.setCommantaire("analyse a faire urgent");
         analyseDTO.setDateDebut(inputFormat.parse("2024-01-19"));
@@ -157,12 +158,12 @@ class AnalyseControllerTest {
                 .andDo(print())
                 .andReturn();
         String response=mvcResult.getResponse().getContentAsString();
-        //System.out.println(response);
         assertNotNull(response);
     }
 
     @Test
     void deleteAnalyse() throws Exception {
+        // Test Suppression Analyse
         when(i_analyse.delAnalyse(any(AnalyseDTO.class))).thenReturn(Boolean.TRUE);
         MvcResult mvcResult= mockMvc.perform(delete("/api/v1/analyse/{id}",1L)
                         .contentType(MediaType.APPLICATION_JSON))

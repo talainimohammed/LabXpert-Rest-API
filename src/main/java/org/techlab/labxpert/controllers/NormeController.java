@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/norme")
+@RequestMapping(value = "/api/v1/norme", produces = "application/json")
 public class NormeController {
 
     @Autowired
@@ -20,17 +20,19 @@ public class NormeController {
 
     @GetMapping
     public List<NormeDTO> showAllNormes(){
+        // API pour Afficher Liste Normes
         return i_norme.showNormes();
     }
     @PostMapping
     public ResponseEntity<NormeDTO> addNorme(@RequestBody @Valid NormeDTO normeDTO){
+        // API pour Ajouter Norme
         NormeDTO normeDTO1=i_norme.addNorme(normeDTO);
         return new ResponseEntity<>(normeDTO1, HttpStatus.CREATED);
     }
     @DeleteMapping("/{id}")
     public HashMap<String,Boolean> delNorme(@PathVariable(value = "id") Long id){
+        // API pour Supprimer Norme
         NormeDTO normeDTO=i_norme.getNormeById(id);
-        //normeDTO.setDeleted(Boolean.TRUE);
         HashMap<String,Boolean> response=new HashMap<>();
         if(i_norme.delNorme(normeDTO)){
             response.put("deleted",Boolean.TRUE);

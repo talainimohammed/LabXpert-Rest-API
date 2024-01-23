@@ -37,7 +37,8 @@ class EchantillonServiceTest {
     PatientDTO patientDTO;
     UtilisateurDTO utilisateurDTO;
     EchantillonDTO echantillonDTO;
-    ModelMapper modelMapper=new ModelMapper();
+    @Autowired
+    ModelMapper modelMapper;
     @BeforeEach
     void setUp() throws ParseException {
         Date date;

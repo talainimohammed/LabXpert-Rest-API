@@ -16,15 +16,15 @@ import java.util.Date;
 @Data
 public class AnalyseDTO {
     private Long idAnalyse;
-    @NotNull(message="nom null")
+    //@NotNull(message="nom null")
     private Echantillon echantillon;
-    @NotBlank(message="nom null")
+    //@NotBlank(message="nom null")
     private String nomAnalyse;
-    @NotNull(message="nom null")
+    //@NotNull(message="nom null")
     private Date dateDebut;
-    @NotNull(message="nom null")
+   // @NotNull(message="nom null")
     private Date dateFin;
-    @NotBlank(message="nom null")
+   // @NotBlank(message="nom null")
     private String commantaire;
     private Collection<ReactifAnalyse> reactifAnalyseList;
     private boolean deleted;

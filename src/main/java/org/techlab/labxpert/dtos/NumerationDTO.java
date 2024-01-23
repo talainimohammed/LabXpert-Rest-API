@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 public class NumerationDTO {
     private Long idNumeration;
     private double value;
-    @NotNull(message="nom null")
+    //@NotNull(message="nom null")
     private StatutNumeration statut;
     @NotNull(message="nom null")
     private Norme norme;

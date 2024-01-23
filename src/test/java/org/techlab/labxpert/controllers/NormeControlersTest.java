@@ -54,7 +54,7 @@ public class NormeControlersTest {
                 .andExpect(status().isCreated());
     }
     @Test
-    public  void test_getContactList() throws Exception {
+    public  void test_getNorme() throws Exception {
         List<NormeDTO > normList =new ArrayList<>();
 
         when(normeServiceImp.showNormes()).thenReturn(normList);
@@ -63,18 +63,9 @@ public class NormeControlersTest {
                 .andExpect(status().isOk())
                 .andDo(print());
     }
-  /*  @Test
-    public void test_deleteContoller() throws Exception {
-
-        doNothing().when(normeServiceImp).delNorme(normeDTO);
-        mockMvc.perform(delete("/api/v1/norme/{id}")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(normeDTO)))
-                .andExpect(status().isOk());
-    }*/
 
     @Test
-    public void test_deleteContoller() throws Exception {
+    public void test_deleteNorme() throws Exception {
         // Mock the behavior of delNorme to do nothing when called with normeDTO
         doReturn(null).when(normeServiceImp).delNorme(normeDTO);
 
@@ -83,14 +74,7 @@ public class NormeControlersTest {
                         .content(new ObjectMapper().writeValueAsString(normeDTO)))
                 .andExpect(status().isOk());
     }
-  /*  public void test_modNorme() throws Exception {
-        when(normeServiceImp.modNorme(normeDTO)).thenReturn(norDTO);
-        mockMvc.perform(put("/api/V2/Echantillon")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(echantillonDTO)))
-                .andExpect(status().isCreated());
-    }
-*/
+
 
 
 }

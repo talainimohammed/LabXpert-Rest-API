@@ -4,9 +4,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.techlab.labxpert.Enum.StatutNumeration;
 import org.techlab.labxpert.dtos.AnalyseDTO;
 import org.techlab.labxpert.dtos.NumerationDTO;
 import org.techlab.labxpert.entity.Analyse;
+import org.techlab.labxpert.entity.Norme;
 import org.techlab.labxpert.entity.Numeration;
 import org.techlab.labxpert.repository.NumerationRepository;
 import org.techlab.labxpert.service.I_Numeration;
@@ -23,6 +25,13 @@ public class NumerationServiceImp implements I_Numeration {
     ModelMapper modelMapper;
     @Override
     public NumerationDTO addNumeration(NumerationDTO numerationDTO) {
+        Norme norme=numerationDTO.getNorme();
+        if (numerationDTO.getValue()>=norme.getMinValue()&& numerationDTO.getValue()<= norme.getMaxValue()){
+            numerationDTO.setStatut(StatutNumeration.Normal);
+        }
+        else {
+            numerationDTO.setStatut(StatutNumeration.Anormal);
+        }
         Numeration numeration=numerationRepository.save(modelMapper.map(numerationDTO,Numeration.class));
         return modelMapper.map(numeration,NumerationDTO.class);
     }

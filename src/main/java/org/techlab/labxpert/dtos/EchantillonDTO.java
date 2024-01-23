@@ -14,15 +14,13 @@ import java.util.List;
 public class EchantillonDTO {
     private Long idEchantillon;
     private Patient patient;
-    @NotNull(message="nom null")
-
+    @NotNull(message="not null")
     private Utilisateur utilisateur;
-    @NotNull(message="nom null")
+    @NotNull(message="not null")
     private Date datePrelevement;
-    @NotBlank(message="nom null")
+    @NotNull(message="not null")
     private String typeAnalyse;
-
-    @NotBlank(message="nom null")
+    //@NotBlank(message="nom null")
     private StatutEchantillon Status;
     private Collection<Analyse> analyses;
     private Collection<OutilEchantillon> outilEchantillonList;
