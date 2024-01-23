@@ -152,7 +152,7 @@ class NumerationControllerTest {
     @Test
     void deleteNumeration() throws Exception {
         when(i_numeration.NumerationWithId(1L)).thenReturn(numerationDTO);
-        when(i_numeration.delNumeration(any(NumerationDTO.class))).thenReturn(numerationDTO.getDeleted());
+        when(i_numeration.delNumeration(any(NumerationDTO.class))).thenReturn(numerationDTO.isDeleted());
         mockMvc.perform(delete("/api/v1/numeration/{id}",1L)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(numerationDTO)))
