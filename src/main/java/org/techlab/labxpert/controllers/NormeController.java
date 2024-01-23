@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.techlab.labxpert.dtos.NormeDTO;
 import org.techlab.labxpert.service.I_Norme;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class NormeController {
         return i_norme.showNormes();
     }
     @PostMapping
-    public ResponseEntity<NormeDTO> addNorme(@RequestBody NormeDTO normeDTO){
+    public ResponseEntity<NormeDTO> addNorme(@RequestBody @Valid NormeDTO normeDTO){
         NormeDTO normeDTO1=i_norme.addNorme(normeDTO);
         return new ResponseEntity<>(normeDTO1, HttpStatus.CREATED);
     }

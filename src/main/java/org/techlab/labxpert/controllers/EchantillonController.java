@@ -18,6 +18,7 @@ import org.techlab.labxpert.service.I_Echantillon;
 import org.techlab.labxpert.service.I_Outil;
 import org.techlab.labxpert.service.I_Outil_Echantillon;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +47,7 @@ public class EchantillonController {
         return ResponseEntity.ok().body(echantillonDTO);
     }
     @PutMapping
-    public ResponseEntity<EchantillonDTO> modEchantillon(@RequestBody EchantillonDTO echantillonDTO) {
+    public ResponseEntity<EchantillonDTO> modEchantillon(@RequestBody @Valid EchantillonDTO echantillonDTO) {
         EchantillonDTO modifiedEchantillon = i_echantillon.modEchantillon(echantillonDTO);
         return new ResponseEntity<>(modifiedEchantillon, HttpStatus.CREATED);
     }
@@ -62,7 +63,7 @@ public class EchantillonController {
         return response;
     }
     @PostMapping
-    ResponseEntity<EchantillonDTO> addEchantillon( @RequestBody EchantillonDTO echantillondto){
+    ResponseEntity<EchantillonDTO> addEchantillon( @RequestBody @Valid EchantillonDTO echantillondto){
         EchantillonDTO echantillonDTO=i_echantillon.addEchantillon(echantillondto);
         /*String uri="http://localhost:8080/api/v1/analyse/echantillon/"+echantillonDTO.getIdEchantillon();
         RestTemplate restTemplate=new RestTemplate();

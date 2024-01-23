@@ -17,6 +17,7 @@ import org.techlab.labxpert.service.I_Echantillon;
 import org.techlab.labxpert.service.I_Rapport;
 import org.techlab.labxpert.service.serviceImp.ResultRepport;
 
+import javax.validation.Valid;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.util.HashMap;
@@ -82,7 +83,7 @@ public class AnalyseController {
     }
 
     @PutMapping
-    public ResponseEntity<AnalyseDTO> updateAnalyse(@RequestBody AnalyseDTO analyseDTO) {
+    public ResponseEntity<AnalyseDTO> updateAnalyse(@RequestBody @Valid AnalyseDTO analyseDTO) {
         AnalyseDTO analyseDTO1 = i_analyse.showAnalyseWithId(analyseDTO.getIdAnalyse());
         analyseDTO1.setDateFin(analyseDTO.getDateFin());
         analyseDTO1.setDateDebut(analyseDTO.getDateDebut());
@@ -105,7 +106,7 @@ public class AnalyseController {
 
     @PostMapping("/planification")
 
-    public ResponseEntity<PlanificationDTO> affectAnalyse(@RequestBody PlanificationDTO planificationDTO) {
+    public ResponseEntity<PlanificationDTO> affectAnalyse(@RequestBody @Valid PlanificationDTO planificationDTO) {
         planificationDTO = i_analyse.planifierAnalyse(planificationDTO);
         return new ResponseEntity<>(planificationDTO, HttpStatus.OK);
     }

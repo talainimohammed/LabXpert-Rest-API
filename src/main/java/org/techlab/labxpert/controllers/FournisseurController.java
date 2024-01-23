@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.techlab.labxpert.dtos.FournisseurDTO;
 import org.techlab.labxpert.service.I_Fournisseur;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,12 +29,12 @@ public class FournisseurController {
         return new ResponseEntity<>(fournisseurDTO, HttpStatus.OK);
     }
     @PostMapping
-    public ResponseEntity<FournisseurDTO> addFournisseur(@RequestBody FournisseurDTO fournisseurDTO){
+    public ResponseEntity<FournisseurDTO> addFournisseur(@RequestBody @Valid FournisseurDTO fournisseurDTO){
         FournisseurDTO fournisseur=i_fournisseur.addFournisseur(fournisseurDTO);
         return new ResponseEntity<>(fournisseur, HttpStatus.CREATED);
     }
     @PutMapping
-    public ResponseEntity<FournisseurDTO> modFournisseur(@RequestBody FournisseurDTO fournisseurDTO){
+    public ResponseEntity<FournisseurDTO> modFournisseur(@RequestBody @Valid FournisseurDTO fournisseurDTO){
         FournisseurDTO fournisseur=i_fournisseur.modFournisseur(fournisseurDTO);
         return new ResponseEntity<>(fournisseur, HttpStatus.OK);
     }
