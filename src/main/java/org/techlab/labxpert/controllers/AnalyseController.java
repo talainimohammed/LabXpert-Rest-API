@@ -90,6 +90,7 @@ public class AnalyseController {
         analyseDTO1.setCommantaire(analyseDTO.getCommantaire());
         analyseDTO1 = i_analyse.modAnalyse(analyseDTO1);
         AnalyseDTO finalAnalyseDTO = analyseDTO1;
+        if(analyseDTO.getDateFin()!=null){
         if(analyseDTO.getReactifAnalyseList()!=null){
         analyseDTO.getReactifAnalyseList().forEach(reactifAnalyse -> {
             Reactif reactif=modelMapper.map(i_reactif.showReactifwithid(reactifAnalyse.getReactif().getIdReactif()),Reactif.class);
@@ -99,6 +100,7 @@ public class AnalyseController {
             reactif.setQuantite(reactif.getQuantite()-reactifAnalyse.getQuantite());
             i_reactif.modReactif(modelMapper.map(reactif, ReactifDTO.class));
         });
+        }
         }
         return new ResponseEntity<>(analyseDTO1, HttpStatus.OK);
     }

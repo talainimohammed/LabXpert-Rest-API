@@ -5,7 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +54,12 @@ class AnalyseControllerTest {
     I_Utilisateur i_utilisateur;
     @MockBean
     I_Rapport i_rapport;
+    @MockBean
+    I_Reactif i_reactif;
+    @MockBean
+    I_ReactifAnalyse i_reactifAnalyse;
+    @MockBean
+    ModelMapper modelMapper;
     @Autowired
     MockMvc mockMvc;
 
@@ -60,8 +68,6 @@ class AnalyseControllerTest {
     EchantillonDTO echantillonDTO;
     AnalyseDTO analyseDTO;
 
-    @Autowired
-    ModelMapper modelMapper;
     Date date;
     SimpleDateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd");
 

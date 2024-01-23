@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Spy;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -30,10 +32,10 @@ public class NormeControlersTest {
 
     @MockBean
     NormeServiceImp normeServiceImp;
-
+    @Spy
+    ModelMapper modelMapper;
     @Autowired
     MockMvc mockMvc;
-
     NormeDTO normeDTO;
 
     @BeforeEach
@@ -67,7 +69,7 @@ public class NormeControlersTest {
     @Test
     public void test_deleteNorme() throws Exception {
         // Mock the behavior of delNorme to do nothing when called with normeDTO
-        doReturn(null).when(normeServiceImp).delNorme(normeDTO);
+        doReturn(true).when(normeServiceImp).delNorme(normeDTO);
 
         mockMvc.perform(delete("/api/v1/norme/{id}", 1)  // Replace '1' with the actual ID
                         .contentType(MediaType.APPLICATION_JSON)

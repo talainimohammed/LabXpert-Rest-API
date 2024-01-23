@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -34,6 +35,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class PatientControlersTest {
     @MockBean
 PatientServiceImp patientServiceImp;
+    @MockBean
+    ModelMapper modelMapper;
     @Autowired
     MockMvc mockMvc;
 
@@ -73,7 +76,7 @@ PatientDTO patientDTO;
     @Test
     public void test_deleteContoller() throws Exception {
         // Mock the behavior of delNorme to do nothing when called with normeDTO
-        doReturn(null).when(patientServiceImp).delPatient(patientDTO);
+        doReturn(true).when(patientServiceImp).delPatient(patientDTO);
 
         mockMvc.perform(delete("/api/v1/patient/{id}", 1)  // Replace '1' with the actual ID
                         .contentType(MediaType.APPLICATION_JSON)

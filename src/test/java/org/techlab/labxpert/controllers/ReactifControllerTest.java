@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,22 +36,22 @@ class ReactifControllerTest {
 
     @MockBean
     I_Reactif i_reactif;
-
+    @Spy
+    ModelMapper modelMapper1;
     @Autowired
     MockMvc mockMvc;
 
+
     ReactifDTO reactifDTO;
-    FournisseurDTO fournisseurDTO;
-    @Autowired
-    ModelMapper modelMapper;
+    FournisseurDTO fournisseur;
     SimpleDateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd");
     @BeforeEach
     void setUp() throws ParseException {
-        fournisseurDTO=new FournisseurDTO();
-        fournisseurDTO.setIdFournisseur(1L);
-        fournisseurDTO.setNom("FourniLabo");
-        fournisseurDTO.setAdresse("qwerty");
-        fournisseurDTO.setTel("231656546");
+        fournisseur=new FournisseurDTO();
+        fournisseur.setIdFournisseur(1L);
+        fournisseur.setNom("FourniLabo");
+        fournisseur.setAdresse("qwerty");
+        fournisseur.setTel("231656546");
 
         reactifDTO=new ReactifDTO();
         reactifDTO.setIdReactif(1L);
@@ -58,7 +59,7 @@ class ReactifControllerTest {
         reactifDTO.setDescription("qwerty");
         reactifDTO.setQuantite(520);
         reactifDTO.setDateExpiration(inputFormat.parse("2025-02-25"));
-        reactifDTO.setFournisseur(modelMapper.map(fournisseurDTO, Fournisseur.class));
+        reactifDTO.setFournisseur(modelMapper1.map(fournisseur,Fournisseur.class));
     }
 
     @Test

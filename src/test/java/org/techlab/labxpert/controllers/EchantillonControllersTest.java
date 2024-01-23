@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Spy;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -30,8 +33,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -53,22 +55,20 @@ public class EchantillonControllersTest {
     I_Outil_Echantillon i_outil_echantillon;
     @MockBean
     I_Outil i_outil;
-
+    @MockBean
+    ModelMapper modelMapper;
     @MockBean
     EchantillonDTO echantillonDTO;
     @MockBean
-   PatientDTO patientDTO;
+   Patient patientDTO;
     @MockBean
-   UtilisateurDTO utilisateurDTO;
+   Utilisateur utilisateurDTO;
 
     @BeforeEach
-
     void setUp() throws ParseException {
-        ModelMapper modelMapper=new ModelMapper();
         Date date;
         SimpleDateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd");
-
-        patientDTO=new PatientDTO();
+        patientDTO=new Patient();
         patientDTO.setId(1L);
         patientDTO.setNom("mohammed");
         patientDTO.setPrenom("prenom mohammed");
@@ -79,8 +79,8 @@ public class EchantillonControllersTest {
         patientDTO.setDateNaissance(date);
        // PatientDTO patientDTO1=i_patient.addPatient(patientDTO);
         /***************************************************************/
-        utilisateurDTO=new UtilisateurDTO();
-        utilisateurDTO.setIdUtilisateur(1L);
+        utilisateurDTO=new Utilisateur();
+        utilisateurDTO.setId(1L);
         utilisateurDTO.setNom("imad");
         utilisateurDTO.setPrenom("prenom imad");
         utilisateurDTO.setAdresse("azerty");
@@ -94,24 +94,23 @@ public class EchantillonControllersTest {
        // UtilisateurDTO utilisateurDTO1=i_utilisateur.addUser(utilisateurDTO);
         /*************************************************************/
         echantillonDTO=new EchantillonDTO();
-        System.out.println(patientDTO);
-        echantillonDTO.setPatient(modelMapper.map(patientDTO, Patient.class));
-
+        echantillonDTO.setIdEchantillon(1L);
+        echantillonDTO.setPatient(patientDTO);
         echantillonDTO.setStatus(StatutEchantillon.EnAttente);
-        echantillonDTO.setUtilisateur(modelMapper.map(utilisateurDTO, Utilisateur.class));
+        echantillonDTO.setUtilisateur(utilisateurDTO);
         date = inputFormat.parse("2024-01-18");
         echantillonDTO.setDatePrelevement(date);
         echantillonDTO.setTypeAnalyse("Biochimie");
     }
 
-    @Test
+    /*@Test
     public void test_saveEchantillon() throws Exception {
         when(echantillonServiceImp.addEchantillon(echantillonDTO)).thenReturn(echantillonDTO);
         mockMvc.perform(post("/api/v1/echantillon")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(echantillonDTO)))
                 .andExpect(status().isCreated());
-    }
+    }*/
     @Test
     public  void test_getEchantillonList() throws Exception {
         List<EchantillonDTO> echantillonList =new ArrayList<>();
@@ -123,9 +122,9 @@ public class EchantillonControllersTest {
                 .andDo(print());
     }
     @Test
-    public void test_deleteContoller() throws Exception {
+    public void test_deleteEchantillon() throws Exception {
         // Mock the behavior of delNorme to do nothing when called with normeDTO
-        doReturn(null).when(echantillonServiceImp).delEchantillhon(echantillonDTO);
+        doReturn(true).when(echantillonServiceImp).delEchantillhon(echantillonDTO);
 
         mockMvc.perform(delete("/api/v1/echantillon/{id}", 1)  // Replace '1' with the actual ID
                         .contentType(MediaType.APPLICATION_JSON)

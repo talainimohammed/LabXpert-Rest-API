@@ -16,9 +16,9 @@ public class NumerationDTO {
     private double value;
     //@NotNull(message="nom null")
     private StatutNumeration statut;
-    @NotNull(message="nom null")
+    @NotNull(message="not null")
     private Norme norme;
-    @NotNull(message="nom null")
+    @NotNull(message="not null")
     private Analyse analyse;
     private boolean deleted;
 }
