@@ -55,5 +55,5 @@ Logging : Log4j pour la gestion des journaux <br/>
 
 #### Diagramme de Classes:
 
-![diagramm Classes](https://github.com/mohatala/LabXpert/blob/master/conception/Classe%20LabXpert.drawio.png)
+![diagramm Classes](https://github.com/mohatala/LabXpert-Rest-API/blob/master/conception/Classe%20LabXpert.drawio.png)
 
