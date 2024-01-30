@@ -36,7 +36,7 @@ class PatientServiceTest {
         patientDTO.setTel("02125232525");
         patientDTO.setSexe("Male");
         date = inputFormat.parse("2000-02-02");
-        patientDTO.setDateNaissance(date);
+        patientDTO.setDatenaissance(date);
     }
 
     @AfterEach

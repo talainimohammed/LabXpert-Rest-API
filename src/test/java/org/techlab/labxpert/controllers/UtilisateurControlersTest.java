@@ -49,7 +49,7 @@ public class UtilisateurControlersTest {
         utilisateurDTO=new UtilisateurDTO();
         utilisateurDTO.setNom("med");
         utilisateurDTO.setPrenom("imad");
-        utilisateurDTO.setDateNaissance(date);
+        utilisateurDTO.setDatenaissance(date);
         utilisateurDTO.setSexe("male");
         utilisateurDTO.setAdresse("qwerty");
         utilisateurDTO.setTel("03251325625");

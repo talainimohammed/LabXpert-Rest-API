@@ -64,7 +64,7 @@ class NumerationControllerTest {
         patientDTO.setTel("02125232525");
         patientDTO.setSexe("Male");
         date = inputFormat.parse("2000-02-02");
-        patientDTO.setDateNaissance(date);
+        patientDTO.setDatenaissance(date);
         /***************************************************************/
         utilisateurDTO=new UtilisateurDTO();
         utilisateurDTO.setIdUtilisateur(1L);
@@ -74,7 +74,7 @@ class NumerationControllerTest {
         utilisateurDTO.setTel("147852369");
         utilisateurDTO.setSexe("Male");
         date = inputFormat.parse("2000-02-02");
-        utilisateurDTO.setDateNaissance(date);
+        utilisateurDTO.setDatenaissance(date);
         utilisateurDTO.setPassword("123456");
         utilisateurDTO.setNomUtilisateur("qwerty");
         utilisateurDTO.setRole(RoleUser.Preleveur);

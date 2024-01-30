@@ -50,7 +50,7 @@ class EchantillonServiceTest {
         patientDTO.setTel("02125232525");
         patientDTO.setSexe("Male");
         date = inputFormat.parse("2000-02-02");
-        patientDTO.setDateNaissance(date);
+        patientDTO.setDatenaissance(date);
         PatientDTO patientDTO1=i_patient.addPatient(patientDTO);
         /***************************************************************/
          utilisateurDTO=new UtilisateurDTO();
@@ -60,7 +60,7 @@ class EchantillonServiceTest {
         utilisateurDTO.setTel("147852369");
         utilisateurDTO.setSexe("Male");
         date = inputFormat.parse("2000-02-02");
-        utilisateurDTO.setDateNaissance(date);
+        utilisateurDTO.setDatenaissance(date);
         utilisateurDTO.setPassword("123456");
         utilisateurDTO.setNomUtilisateur("qwerty");
         utilisateurDTO.setRole(RoleUser.Preleveur);

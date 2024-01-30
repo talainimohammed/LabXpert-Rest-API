@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping(value="/api/v1/fournisseur", produces = "application/json")
 public class FournisseurController {
 

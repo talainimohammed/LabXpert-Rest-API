@@ -53,7 +53,7 @@ class NumerationServiceTest {
         patientDTO.setTel("0617066494");
         patientDTO.setSexe("Male");
         date = inputFormat.parse("1995-02-28");
-        patientDTO.setDateNaissance(date);
+        patientDTO.setDatenaissance(date);
         PatientDTO patientDTO1=i_patient.addPatient(patientDTO);
         /***************************************************************/
         utilisateurDTO=new UtilisateurDTO();
@@ -63,7 +63,7 @@ class NumerationServiceTest {
         utilisateurDTO.setTel("147852369");
         utilisateurDTO.setSexe("Male");
         date = inputFormat.parse("2000-02-02");
-        utilisateurDTO.setDateNaissance(date);
+        utilisateurDTO.setDatenaissance(date);
         utilisateurDTO.setPassword("123456");
         utilisateurDTO.setNomUtilisateur("imad");
         utilisateurDTO.setRole(RoleUser.Preleveur);
