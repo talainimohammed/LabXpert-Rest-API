@@ -52,7 +52,7 @@ PatientDTO patientDTO;
         patientDTO.setTel("02125232525");
         patientDTO.setSexe("Male");
         date = inputFormat.parse("2000-02-02");
-        patientDTO.setDatenaissance(date);
+        patientDTO.setDateNaissance(date);
     }
     @Test
     public void test_savePatient() throws Exception {

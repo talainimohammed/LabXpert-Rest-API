@@ -81,7 +81,7 @@ class AnalyseControllerTest {
         patientDTO.setTel("02125232525");
         patientDTO.setSexe("Male");
         date = inputFormat.parse("2000-02-02");
-        patientDTO.setDatenaissance(date);
+        patientDTO.setDateNaissance(date);
         //when(i_patient.addPatient(patientDTO)).thenReturn(patientDTO);
         //PatientDTO patientDTO1=i_patient.addPatient(patientDTO);
         /***************************************************************/

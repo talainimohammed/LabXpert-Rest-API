@@ -57,7 +57,7 @@ class AnalyseServiceTest {
         patientDTO.setTel("02125232525");
         patientDTO.setSexe("Male");
         date = inputFormat.parse("2000-02-02");
-        patientDTO.setDatenaissance(date);
+        patientDTO.setDateNaissance(date);
         PatientDTO patientDTO1=i_patient.addPatient(patientDTO);
         /***************************************************************/
         utilisateurDTO=new UtilisateurDTO();

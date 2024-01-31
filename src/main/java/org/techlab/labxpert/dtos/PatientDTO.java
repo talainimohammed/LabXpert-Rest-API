@@ -18,7 +18,7 @@ public class PatientDTO {
     private String prenom;
     @NotNull(message ="dateNaissance est null" )
     @Past
-    private Date datenaissance;
+    private Date dateNaissance;
     @NotNull(message ="sexe est null" )
     private String sexe;
     @NotNull(message ="adresse est null" )
